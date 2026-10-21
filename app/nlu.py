@@ -30,7 +30,13 @@ MEETING_NOUNS = {
     "встрече": "Встреча", "созвоне": "Созвон", "планерке": "Планёрка", "планёрке": "Планёрка",
     "совещании": "Совещание",
 }
-MEETING_WORD_RE = rf"(встреч|созвон|план{E}рк|совещани|демо\b)"
+MEETING_WORD_RE = rf"(встреч|созвон|план{E}рк|совещани|демо\b|\bвстрет(?:иться|имся)\b|\bувид(?:еться|имся)\b|\bпересеч(?:ься|{E}мся)\b)"
+# «встретиться с Иваном» → «Встреча с Иваном»
+MEETING_VERBS = {
+    "встретиться": "Встреча", "встретимся": "Встреча", "увидеться": "Встреча", "увидимся": "Встреча",
+    "пересечься": "Встреча", "пересечёмся": "Встреча", "пересечемся": "Встреча",
+    "созвониться": "Созвон", "созвонимся": "Созвон",
+}
 
 STOPWORDS = {
     "с", "со", "по", "про", "о", "об", "на", "в", "во", "к", "ко", "для", "и", "у", "меня", "мне", "мою", "мой",
@@ -331,7 +337,7 @@ def strip_lead(text: str) -> str:
             if m:
                 rest = imperative + rest[m.end():]
                 break
-    rest = re.sub(r"^напомни(\s+мне)?[\s,]+(?:о\s+том|про\s+то)?[\s,]*(?:что|чтобы)\b[\s,]*", r"напомни\1 ", rest, flags=I)
+    rest = re.sub(r"^напомни(\s+мне)?(?:[\s,]+пожалуйста)?[\s,]+(?:о\s+том|про\s+то)?[\s,]*(?:что|чтобы)\b[\s,]*", r"напомни\1 ", rest, flags=I)
     rest = re.sub(r"^напомни(\s+мне)?\s+(?:о\s+том|про\s+то)\b[\s,]*", r"напомни\1 ", rest, flags=I)
     rest = rest.strip(" ,")
     return rest or text
@@ -466,10 +472,13 @@ def parse(raw: str, now: datetime) -> Parse:
     body = re.sub(r"\b(?:у\s+меня|мне|нужно|надо|необходимо|не\s+забыть|пожалуйста)\b", " ", body, flags=I)
     body = re.sub(r"\b(?:утром|вечером|днём|днем)\b", " ", body, flags=I)
     body = " ".join(body.split()).strip(" ,.:;!—-")
+    body = _clean_clause(body)
     if is_reminder:
         body = re.sub(r"^(?:про|о|об|насчёт|насчет)\s+", "", body, flags=I)
     # Существительное встречи — в именительный падеж: «встречу с Иваном» → «Встреча с Иваном»
     first = body.split(" ", 1)
+    if first and first[0].lower() in MEETING_VERBS and len(first) > 1 and re.match(r"(?:с|со)\s", first[1], I):
+        first[0] = MEETING_VERBS[first[0].lower()]
     if first and first[0].lower() in MEETING_NOUNS:
         noun = MEETING_NOUNS[first[0].lower()]
         rest = first[1] if len(first) > 1 else ""
@@ -480,6 +489,43 @@ def parse(raw: str, now: datetime) -> Parse:
     body = body.strip(" ,.:;!—-")
     result.text = capitalize(body) if body else None
     return result
+
+
+# «чтобы я проверил наушники» → «проверить наушники»: союз и «я» убираем, глагол — в инфинитив
+CLAUSE_RE = re.compile(
+    r"^(?:(?:о\s+том|про\s+то)?[\s,]*(?:что|чтобы|чтоб)\b[\s,]*(?:(?:я|мы)\s+)?|(?:я|мы)\s+)"
+    r"(?:(?:должен|должна|должны|обязательно)\s+)?",
+    I,
+)
+
+try:
+    import pymorphy3
+    _MORPH = pymorphy3.MorphAnalyzer()
+except Exception:  # noqa: BLE001 — без pymorphy3 оставляем глагол как есть
+    _MORPH = None
+
+
+def _infinitive(word: str) -> str:
+    if _MORPH is None:
+        return word
+    for form in _MORPH.parse(word):
+        if form.tag.POS == "VERB" and form.score > 0.1:
+            return form.normal_form
+        if form.tag.POS == "INFN":
+            return word
+    return word
+
+
+def _clean_clause(body: str) -> str:
+    m = CLAUSE_RE.match(body)
+    if not m or not body[m.end():].strip():
+        return body
+    rest = body[m.end():].strip(" ,")
+    head, _, tail = rest.partition(" ")
+    verb = _infinitive(head)
+    if verb != head.lower():
+        rest = f"{verb} {tail}".strip()
+    return rest
 
 
 # ── Несколько дел одной фразой ────────────────────────
