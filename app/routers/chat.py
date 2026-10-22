@@ -383,7 +383,9 @@ async def save(ctx: Ctx, draft: dict) -> dict:
         speech = f"{speech} {tail_speech}" if speech and tail_speech else speech
         others = sorted([data] + [r.to_contract() for r in near], key=lambda r: r["time"])
         return reply("created", text, speech, records=others, buttons=undo_button(ctx, record))
-    return reply("created", text, speech, records=[data], buttons=undo_button(ctx, record))
+    # «Запиши …» без срока могло быть заметкой — одной кнопкой переносим в заметки
+    to_note = [button_action("В заметки", "to_note", record.id, style="secondary")] if template == "created_task_nodate" else []
+    return reply("created", text, speech, records=[data], buttons=to_note + undo_button(ctx, record))
 
 
 # ── Несколько дел одной фразой ────────────────────────
@@ -1208,7 +1210,11 @@ async def edit_one(ctx: Ctx, record: Record, changes: dict) -> dict:
         record.text = f"{record.text} — {changes['note']}"[:300]
         template = "noted"
     new_type = changes.get("type")
-    if new_type and record.type.value != new_type:
+    if new_type == "note" and record.type != TaskType.note:
+        record.type, record.status = TaskType.note, None
+        record.date, record.time, record.date_kind = None, None, DateKind.none
+        template = "to_note"
+    elif new_type and record.type.value != new_type:
         record.type = TaskType(new_type)
         record.status = None if new_type == "meeting" else (record.status or TaskStatus.open)
         if new_type != "task" and record.date_kind != DateKind.exact:
@@ -1694,6 +1700,10 @@ async def handle_action(ctx: Ctx, action_id: str, record_id: int | None) -> dict
         ctx.conv.pending = Pending("new_time", {**pending.draft, "time": None})
         text, speech = ctx.say("conflict_new_time")
         return reply("clarify", text, speech, awaiting=True, buttons=[CANCEL])
+
+    if action_id == "to_note" and (record := await owned_record(ctx, record_id)):
+        ctx.conv.pending = None
+        return await edit_one(ctx, record, {"type": "note"})
 
     feature = {"undo": "d10", "restore": "d2", "delete": "d2", "complete": "d3"}.get(action_id)
     if feature and feature in ctx.features:

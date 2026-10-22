@@ -550,7 +550,11 @@ MOVE_RE = re.compile(r"^(?:перенеси(?:те)?|перенести|пере
 RENAME_RE = re.compile(r"^(?:переименуй(?:те)?|переименовать|переназови|назови|(?:поменяй|измени|смени)\s+название)\b\s*(?P<rest>.*)$", I)
 RETYPE_RE = re.compile(
     r"^(?:сделай|сделать|преврати|переделай|поменяй|измени|смени)\s+(?P<target>.+?)\s+(?:тип\s+)?(?:(?:в|на)\s+)?"
-    r"(?P<type>задач(?:ей|у|а)|напоминани(?:ем|е)|встреч(?:ей|у|а))[\s.!?]*$", I)
+    r"(?P<type>задач(?:ей|у|а)|напоминани(?:ем|е)|встреч(?:ей|у|а)|заметк(?:ой|у|а))[\s.!?]*$", I)
+# «Это заметка», «перенеси её в заметки» — последняя запись становится заметкой
+TO_NOTE_RE = re.compile(
+    r"^(?:(?:нет|не)[\s,]+)?(?:это\s+(?:была\s+|же\s+)?(?:заметка|идея|мысль)"
+    r"|(?:перенеси|убери|сохрани|положи|отправь|запиши|переложи|кинь)\s+(?P<target>.+?)\s+в\s+заметки)[\s.!?]*$", I)
 NOTE_WORDS = r"(?:заметку|примечание|комментарий|пометку|описание)"
 NOTE_RE = re.compile(
     rf"^(?:добавь|допиши|припиши|добавить|дописать)\s+(?:(?:к|ко|в|во)\s+(?P<target>.+?)\s+{NOTE_WORDS}[\s:,—-]+(?P<note>.+)"
@@ -570,7 +574,7 @@ NOTES_LIST_RE = re.compile(
     r"|что\s+(?:у\s+меня\s+)?(?:есть\s+)?в\s+|)"
     r"(?:заметки|заметках|заметок|идеи|идей|мысли)\b(?P<rest>.*)$",
     I)
-TYPE_BY_STEM = {"задач": "task", "напомин": "reminder", "встреч": "meeting"}
+TYPE_BY_STEM = {"задач": "task", "напомин": "reminder", "встреч": "meeting", "заметк": "note"}
 SHIFT_RE = re.compile(r"\bна\s+(полчаса|(\d+)?\s*час\w*|(\d+)\s*минут\w*)\s+(позже|раньше)\b", I)
 ALL_RE = re.compile(r"\b(?:вс[её]|всех)\b", I)
 SOURCE_RE = re.compile(
@@ -1032,6 +1036,9 @@ def parse_edit(text: str, now: datetime) -> Parse | None:
     elif m := RETYPE_RE.match(text):
         result = _target(re.sub(r"^(?:из|с)\s+", "", m["target"], flags=I), now)
         result.new_type = next(v for k, v in TYPE_BY_STEM.items() if m["type"].lower().startswith(k))
+    elif m := TO_NOTE_RE.match(text):
+        result = _target(m["target"] or "её", now)
+        result.new_type = "note"
     elif m := NOTE_RE.match(text):
         result = _target(m["target"] or m["ref"] or m["target2"] or "", now)
         result.note = (m["note"] or m["note2"]).strip(" ,.!?:—-")
