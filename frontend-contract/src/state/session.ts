@@ -1,6 +1,7 @@
 /** Режимы, запуск, вход и выход, пробуждение сервера — 03-behavior.md, разделы 1 и 5. */
 import { api, ApiFailure, setModeHeaders } from '../api';
 import { features } from '../config/features';
+import { setServerFeatures } from '../config/server';
 import { uuid } from '../lib/uuid';
 import { dropOldVersions, storage } from '../storage';
 import { emitActivity } from './events';
@@ -21,8 +22,10 @@ export function checkHealth(): Promise<boolean> {
   healthPromise = (async () => {
     while (Date.now() - started < HEALTH_TIMEOUT) {
       const left = HEALTH_TIMEOUT - (Date.now() - started);
-      if (await api.health(left)) {
+      const health = await api.health(left);
+      if (health) {
         clearTimeout(waking);
+        setServerFeatures(health.features);
         store.set({ server: 'ok' });
         return true;
       }

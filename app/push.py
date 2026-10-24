@@ -1,7 +1,7 @@
 """Пуш-уведомления (Web Push): приходят, даже когда вкладка закрыта.
 
 Раз в 30 секунд смотрим записи тех, кто подписался: напоминание звонит в своё время,
-встреча — за 10 минут. У пуша кнопки «Посмотреть» и «Через 10 минут» (public/sw.js);
+встреча — за remind_before минут (по умолчанию 15). У пуша кнопки «Посмотреть» и «Через 10 минут» (public/sw.js);
 отложенное лежит в push_snoozes и уходит ещё раз в свой срок. Время записи местное, поэтому пояс берём из подписки браузера.
 Демо-записи песочницы (demo) не звонят — только то, что человек завёл сам.
 """
@@ -17,9 +17,9 @@ from pywebpush import WebPushException, webpush
 from sqlalchemy import delete, select
 
 from app.database import AsyncSessionLocal
+from app.textfmt import plural
 from app.models import AppSetting, PushSent, PushSnooze, PushSubscription, Record, TaskStatus, TaskType
 
-MEETING_EARLY_MIN = 10
 TICK_SECONDS = 30
 # Опоздали больше чем на столько (сервер спал) — уже не шлём
 LATE_LIMIT = timedelta(minutes=15)
@@ -70,7 +70,18 @@ def fire_at(record: Record, tz) -> datetime | None:
         at = datetime.fromisoformat(f"{record.date}T{record.time}").replace(tzinfo=tz)
     except ValueError:  # кривые дата или время в одной записи не должны останавливать пуши всем
         return None
-    return at - timedelta(minutes=MEETING_EARLY_MIN) if record.type == TaskType.meeting else at
+    return at - timedelta(minutes=record.remind_minutes()) if record.type == TaskType.meeting else at
+
+
+def minutes_text(total: int) -> str:
+    """15 → «15 минут», 30 → «полчаса», 60 → «час», 120 → «2 часа»."""
+    if total == 30:
+        return "полчаса"
+    if total == 60:
+        return "час"
+    if total % 60 == 0:
+        return plural(total // 60, "час", "часа", "часов")
+    return plural(total, "минуту", "минуты", "минут")
 
 
 def record_key(record: Record) -> str:
@@ -79,12 +90,14 @@ def record_key(record: Record) -> str:
 
 
 def payload(record: Record, snoozed: bool = False) -> str:
-    if record.type == TaskType.meeting and not snoozed:
-        body = f"Через {MEETING_EARLY_MIN} минут: {record.text}"
+    """Две строки (контракт v1.5, 4.2): фраза Стивенса и текст записи."""
+    if snoozed:
+        first = "Позвольте напомнить ещё раз."
     elif record.type == TaskType.meeting:
-        body = f"Встреча: {record.text}"
+        first = f"Через {minutes_text(record.remind_minutes())} у вас встреча."
     else:
-        body = record.text
+        first = "Позвольте напомнить."
+    body = f"{first}\n{record.text}"
     return json.dumps({
         "title": "Stevens", "body": body, "tag": record_key(record),
         "record_id": record.id, "snoozed": snoozed,

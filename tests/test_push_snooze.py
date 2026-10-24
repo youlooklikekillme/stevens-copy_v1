@@ -50,7 +50,7 @@ async def main():
                 await db.commit()
             await push.tick()
             mine = [d for e, d in sent if e == endpoint]
-            check("пуш ещё раз", len(mine) == 1 and mine[0]["record_id"] == rid and mine[0]["snoozed"] is True and mine[0]["body"] == "Позвонить Ивану")
+            check("пуш ещё раз", len(mine) == 1 and mine[0]["record_id"] == rid and mine[0]["snoozed"] is True and mine[0]["body"] == "Позвольте напомнить ещё раз.\nПозвонить Ивану")
             check("чужим не шлёт", not [s for s in sent if s[0] == foreign])
             await push.tick()
             check("только один раз", len([d for e, d in sent if e == endpoint]) == 1)

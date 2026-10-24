@@ -87,13 +87,42 @@ async function json(response: Response): Promise<unknown> {
 }
 
 export const api = {
-  async health(timeout: number): Promise<boolean> {
+  /** Жив ли сервер и какие фичи включены. null — не ответил */
+  async health(timeout: number): Promise<{ features: string[] | null } | null> {
     try {
       const response = await request('/api/health', { auth: false, timeout });
-      const data = (await json(response)) as { status?: string };
-      return data.status === 'ok';
+      const data = (await json(response)) as { status?: string; features?: unknown };
+      if (data.status !== 'ok') return null;
+      const list = Array.isArray(data.features) ? data.features.filter((f): f is string => typeof f === 'string') : null;
+      return { features: list };
     } catch {
-      return false;
+      return null;
+    }
+  },
+
+  /** Сбои сайта для журнала (Ф0): не мешают работе, ответа не ждём */
+  log(event: 'mic_failed' | 'autolisten_failed' | 'speech_failed' | 'stt_fallback', detail: string): void {
+    void request('/api/log', {
+      method: 'POST', timeout: 10000, body: { event, detail: detail.slice(0, 2000), client_time: new Date().toISOString() },
+    }).catch(() => undefined);
+  },
+
+  /** Распознавание на сервере (Ф4): аудио одной фразы → текст */
+  async stt(audio: Blob): Promise<string> {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 25000);
+    try {
+      const response = await fetch(`${base}/api/stt`, {
+        method: 'POST', body: audio, signal: controller.signal,
+        headers: { ...modeHeaders, 'Content-Type': audio.type.split(';')[0] || 'audio/webm' },
+      });
+      if (!response.ok) throw new ApiFailure({ type: 'server' });
+      const text = ((await response.json()) as { text?: unknown }).text;
+      return typeof text === 'string' ? text : '';
+    } catch (error) {
+      throw error instanceof ApiFailure ? error : new ApiFailure({ type: 'network' });
+    } finally {
+      clearTimeout(timer);
     }
   },
 
@@ -147,6 +176,14 @@ export const api = {
 
   async pushSubscribe(subscription: PushSubscriptionJSON, timezone: string): Promise<void> {
     await request('/api/push/subscribe', { method: 'POST', body: { ...subscription, timezone } });
+  },
+
+  async pushUnsubscribe(endpoint: string): Promise<void> {
+    await request('/api/push/unsubscribe', { method: 'POST', body: { endpoint }, auth: false });
+  },
+
+  async pushSnooze(endpoint: string, recordId: number): Promise<void> {
+    await request('/api/push/snooze', { method: 'POST', body: { endpoint, record_id: recordId }, auth: false });
   },
 
   async resetSandbox(): Promise<void> {

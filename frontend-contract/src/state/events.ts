@@ -13,7 +13,11 @@ export type UiActivity =
   /** Услышали «Стивенс» — запись началась без кнопки */
   | 'wake'
   /** Сохранена форма «Исправить» в ленте (Д10) — персонаж «готово» */
-  | 'edit-saved';
+  | 'edit-saved'
+  /** Запись перенесли перетаскиванием в календаре (Ф13) — шаг обучения «Календарь» */
+  | 'calendar-moved'
+  /** Нажали «Посмотреть» на карточке уведомления (Ф10) — шаг обучения «Уведомление» */
+  | 'notify-viewed';
 
 type ResponseListener = (response: ChatResponse, request: ChatRequest) => void;
 type ActivityListener = (kind: UiActivity) => void;

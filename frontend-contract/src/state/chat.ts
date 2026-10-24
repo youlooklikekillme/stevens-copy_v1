@@ -56,7 +56,7 @@ async function run(request: ChatRequest, pendingId: string): Promise<void> {
 export function send(
   rawText: string,
   source: ChatRequest['source'],
-  options: { action?: Action | null; fromId?: string; buttonIndex?: number } = {},
+  options: { action?: Action | null; fromId?: string; buttonIndex?: number; rawText?: string } = {},
 ): boolean {
   const state = store.get();
   if (state.waiting || state.recording) return false;
@@ -69,6 +69,7 @@ export function send(
     action: options.action ?? null,
     client_time: isoWithOffset(),
     timezone: timezone(),
+    ...(source === 'voice' && options.rawText ? { raw_text: options.rawText.slice(0, 600) } : {}),
   };
   const pendingId = uuid();
   store.set((s) => ({

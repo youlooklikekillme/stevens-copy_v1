@@ -1,4 +1,5 @@
 /** Строка ввода — 02-screens.md, 2.5–2.6. */
+import { serverHas } from '../config/server';
 import { ArrowUp, Mic, Trash2 } from 'lucide-react';
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { T, fill } from '../content/texts';
@@ -159,7 +160,7 @@ export function Composer() {
                 onClick={() => { emitActivity('button-press'); startRecording(); }}>
                 <Mic size={18} strokeWidth={1.5} aria-hidden="true" />
               </button>
-              <WakeDot />
+              {serverHas('f20') && <WakeDot />}
             </span>
             <div className="composer__field">
               <textarea

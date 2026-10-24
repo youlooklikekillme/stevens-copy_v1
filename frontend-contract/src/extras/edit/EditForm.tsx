@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { api, ApiFailure, errorKey } from '../../api';
 import type { RecordItem } from '../../api/types';
 import { Dots } from '../../components/Dots';
-import { T } from '../../content/texts';
+import { T, fill } from '../../content/texts';
 import { createdText } from '../../lib/dates';
 import { sessionExpired } from '../../state/session';
 import { buildPatch, validate, type EditErrors } from './patch';
@@ -18,11 +18,19 @@ type Props = {
   onDelete?: () => void;
 };
 
+/** Встреча: за сколько напомнить — 5, 10, 15, 30 минут или 1 час (контракт v1.5, Ф5) */
+const REMIND_DEFAULT = 15;
+const REMIND_CHOICES = [5, 10, 15, 30, 60];
+const remindOptions = (current: number | null | undefined) =>
+  current != null && !REMIND_CHOICES.includes(current) ? [...REMIND_CHOICES, current].sort((a, b) => a - b) : REMIND_CHOICES;
+const remindLabel = (m: number) => (m === 60 ? T.edit_remind_hour : fill(T.edit_remind_minutes, { n: m }));
+
 export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
   const [text, setText] = useState(record.text);
   const [date, setDate] = useState(record.date ?? '');
   const [time, setTime] = useState(record.time ?? '');
   const [end, setEnd] = useState(record.end_time ?? '');
+  const [remind, setRemind] = useState(String(record.remind_before ?? REMIND_DEFAULT));
   const interval = record.type === 'busy' || !!record.end_time;
   const [errors, setErrors] = useState<EditErrors>({});
   const [failure, setFailure] = useState<string | null>(null);
@@ -43,7 +51,10 @@ export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
   }, [text]);
 
   const save = async () => {
-    const values = interval ? { text, date, time, end } : { text, date, time };
+    const values = {
+      text, date, time, ...(interval ? { end } : {}),
+      ...(record.type === 'meeting' ? { remindBefore: Number(remind) } : {}),
+    };
     const found = validate(record, values);
     setErrors(found);
     if (found.text || found.datetime || record.id === null) return;
@@ -107,6 +118,16 @@ export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
         )}
       </div>}
       {errors.datetime && <span className="edit-form__error">{T[errors.datetime]}</span>}
+      {record.type === 'meeting' && (
+        <label className="edit-form__field">
+          <span className="edit-form__label">{T.edit_remind}</span>
+          <select className="edit-form__input" value={remind} disabled={busy} onChange={(e) => setRemind(e.target.value)}>
+            {remindOptions(record.remind_before).map((m) => (
+              <option key={m} value={m}>{remindLabel(m)}</option>
+            ))}
+          </select>
+        </label>
+      )}
       {createdText(record) && <span className="edit-form__created">{createdText(record)}</span>}
       {failure && (
         <div className="edit-form__failure" role="alert">

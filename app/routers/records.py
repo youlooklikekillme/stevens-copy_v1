@@ -65,7 +65,7 @@ async def list_records(
 
 def apply_patch(record: Record, body: dict) -> str | None:
     """Меняет запись по правилам 15.5. Возвращает код ошибки или None."""
-    allowed = {"text", "date", "time", "end_time", "status"}
+    allowed = {"text", "date", "time", "end_time", "status", "remind_before"}
     if not body or set(body) - allowed:
         return "invalid_fields"
     text = body.get("text", record.text)
@@ -81,6 +81,11 @@ def apply_patch(record: Record, body: dict) -> str | None:
     if "status" in body:
         if status not in ("open", "done") or record.type in (TaskType.meeting, TaskType.note, TaskType.busy):
             return "invalid_status"
+
+    remind = body.get("remind_before")
+    if "remind_before" in body and (record.type != TaskType.meeting or isinstance(remind, bool)
+                                    or not isinstance(remind, int) or not 0 <= remind <= 1440):
+        return "invalid_remind_before"  # только у встречи, целое 0–1440
 
     if record.type == TaskType.note and (new_date is not None or new_time is not None):
         return "invalid_date"  # у заметки нет даты и времени
@@ -108,6 +113,8 @@ def apply_patch(record: Record, body: dict) -> str | None:
 
     record.text = text.strip()
     record.date, record.time, record.date_kind = new_date, new_time, kind
+    if "remind_before" in body:
+        record.remind_before = remind
     record.end_time = new_end if record.type in (TaskType.busy, TaskType.meeting) and new_time else None
     if "status" in body:
         record.status = TaskStatus(status)

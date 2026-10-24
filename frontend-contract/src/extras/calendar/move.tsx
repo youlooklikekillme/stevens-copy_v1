@@ -66,6 +66,7 @@ async function save(record: RecordItem, date: string, time: string | null) {
     showNotice({ kind: 'moved', text: fill(T.calendar_moved, { when: whenText(date, time) }), record: saved,
       back: { date: record.date, time: record.time } });
     emitActivity('edit-saved');
+    emitActivity('calendar-moved');
     emitRecordsChanged();
     void load();
   } catch (error) {

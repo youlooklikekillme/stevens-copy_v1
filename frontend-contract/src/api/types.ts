@@ -30,6 +30,8 @@ export interface ChatRequest {
   client_time: IsoMoment;
   /** IANA, например "Europe/Moscow" — Intl.DateTimeFormat().resolvedOptions().timeZone */
   timezone: string;
+  /** Голос: что распознал браузер до поправок ослышки — только для журнала (контракт v1.5, Ф4) */
+  raw_text?: string | null;
 }
 
 // ── Ответ POST /api/chat ──────────────────────────────
@@ -97,8 +99,8 @@ export interface RecordItem {
   demo: boolean;
   marks: RecordMark[];
   highlight: HighlightField | null;
-  /** резерв, Д7 */
-  remind_at?: IsoMoment | null;
+  /** Только у встреч: за сколько минут прислать уведомление, по умолчанию 15 (контракт v1.5, Ф10) */
+  remind_before?: number | null;
 }
 
 export interface Repeat {
@@ -136,6 +138,8 @@ export interface Action {
 
 export interface HealthResponse {
   status: 'ok';
+  /** Включённые фичи: «f0»…«f25» и «stt» (контракт v1.5, 1.1). Нет поля — старый сервер, считаем, что есть всё */
+  features?: string[];
 }
 
 // ── Вход и песочница (раздел 14 контракта v1.3, ждёт подтверждения бэка) ──
@@ -189,6 +193,8 @@ export interface RecordPatch {
   time?: LocalTime | null;
   end_time?: LocalTime | null;
   status?: 'open' | 'done';
+  /** Только у встречи: 0–1440 минут */
+  remind_before?: number;
 }
 
 /** PATCH /api/records/{id} и POST /api/records/{id}/restore → 200 */

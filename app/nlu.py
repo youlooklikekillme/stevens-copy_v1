@@ -106,6 +106,9 @@ class Parse:
     day_part: str | None = None  # list: «сегодня вечером» — утром | днём | вечером
     next: bool = False          # search: «какое следующее дело», «ближайшая встреча» — ближайшая запись впереди
     only_when: bool = False     # во фразе только день: «а на завтра?» — список, а в уточнении это ответ
+    remind_before: int | None = None  # create / edit: «напомни за полчаса» — уведомление о встрече за 30 минут
+    time_guess: str | None = None  # create: «утром» без часа — время поставили сами (day_part)
+    part_word: str | None = None  # create: «утро» / «день» / «вечер» для day_part_set
     doubt: list[dict] = field(default_factory=list)  # create: почему разбор неуверенный — спросим «Верно понял?»
     end_time: str | None = None  # «с 9 до 18»: до скольки (у занятости, у встречи — если сказали)
 
@@ -723,6 +726,39 @@ def person_request(text: str) -> tuple[list[str], str] | None:
 # ── Главная функция ───────────────────────────────────
 
 THANKS_RE = re.compile(r"\b(спасибо|благодарю|благодарствую|спс)\b[,!.\s]*(стивенс|stevens)?[,!.]*", I)
+GREETING_RE = re.compile(r"^(?:привет\w*|здравствуй\w*|добр(?:ый|ое|ого)\s+(?:день|утро|вечер|утра|вечера|дня)|хай|салют)\b", I)
+# «Напомни за полчаса», «и напомни мне о ней за час до начала»
+REMIND_AMOUNT = r"(?P<amount>полчаса|пол\s+часа|час|полтора\s+часа|\d{1,4}\s*(?:минут\w*|мин\.?|час\w*)|(?:пять|десять|пятнадцать|двадцать|тридцать|сорок)\s+минут\w*|два\s+часа)"
+REMIND_BEFORE_RE = re.compile(
+    rf"[\s,]*(?:\bи\s+)?\bнапомни(?:те)?(?:\s+мне)?(?:\s+(?:о\s+ней|о\s+н[её]м|об\s+этом|о\s+встрече))?\s+за\s+{REMIND_AMOUNT}"
+    rf"(?:\s+до\s+(?:не[её]|встречи|начала|него))?(?=[\s,.!]*$|[\s,]+)", I)
+REMIND_ONLY_RE = re.compile(
+    rf"(?:(?:стив\w*|stevens?)[\s,]+)?(?:и\s+)?(?:пожалуйста\s+)?(?:напомни(?:те)?|пришли\s+уведомление|уведоми)(?:\s+мне)?"
+    rf"(?:\s+(?:о\s+ней|о\s+н[её]м|об\s+этом|о\s+встрече|про\s+(?:неё|нее|него|встречу)))?\s+за\s+{REMIND_AMOUNT}"
+    rf"(?:\s+до\s+(?:не[её]|встречи|начала|него))?[\s.!]*", I)
+WORD_NUM = {"пять": 5, "десять": 10, "пятнадцать": 15, "двадцать": 20, "тридцать": 30, "сорок": 40}
+
+
+def remind_minutes(amount: str) -> int | None:
+    """«полчаса» → 30, «час» → 60, «15 минут» → 15. Больше суток — None."""
+    a = " ".join(amount.lower().split())
+    if a in ("полчаса", "пол часа"):
+        value = 30
+    elif a == "час":
+        value = 60
+    elif a == "полтора часа":
+        value = 90
+    elif a == "два часа":
+        value = 120
+    elif m := re.match(r"(\d+)\s*(минут\w*|мин\.?|час\w*)", a):
+        value = int(m.group(1)) * (60 if m.group(2).startswith("час") else 1)
+    elif m := re.match(r"(\w+)\s+минут", a):
+        value = WORD_NUM.get(m.group(1), 0)
+    else:
+        return None
+    return value if 0 < value <= 1440 else None
+
+
 HELP_RE = re.compile(r"(^(?:привет\w*|здравствуй\w*|добр(?:ый|ое|ого)\s+(?:день|утро|вечер|утра|вечера|дня)|хай|салют)(?:[\s,!.]+(?:стивенс|stevens))?[\s,!.)]*$"
                      r"|^(?:кто\s+ты|ты\s+кто|как\s+тебя\s+зовут|что\s+ты\s+такое)[\s?!.]*$|что\s+ты\s+умеешь|что\s+умеешь|чем\s+(?:ты\s+)?(?:можешь\s+)?помочь|^помощь|^справка|как\s+(?:тобой|этим)\s+пользоваться)", I)
 DELETE_RE = re.compile(r"^(?:пожалуйста\s+)?(удали(?:те)?|удалить|убери(?:те)?|убрать|сотри|стереть|очисти(?:ть)?"
@@ -1077,6 +1113,11 @@ def fix_typos(text: str) -> tuple[str, list[dict]]:
     return re.sub(r"[А-Яа-яЁё]+", fix, text), fixes
 
 
+# Часть дня без часа при создании: записываем сразу и говорим, какое время поставили
+DAY_PART_TIME_RE = re.compile(r"\b(утром|днём|днем|вечером)\b", I)
+DAY_PART_TIME = {"утром": ("09:00", False), "днём": ("13:00", False), "вечером": ("19:00", False)}
+DAY_PART_WORD = {"утром": "утро", "днём": "день", "вечером": "вечер"}
+
 # Расплывчатое время: угадываем и переспрашиваем
 VAGUE_TIME = [
     (r"ближе\s+к\s+вечеру", "17:00"), (r"под\s+вечер", "18:00"), (r"после\s+работы", "18:00"),
@@ -1138,7 +1179,7 @@ def parse(raw: str, now: datetime) -> Parse:
     # «Пока», «до свидания», «спокойной ночи» — целиком, как благодарность
     if re.fullmatch(r"(?:(?:ну|ладно|всё|все|ок)[\s,]+)*(?:пока(?:-пока)?|до\s+свидания|до\s+завтра|спокойной\s+ночи|бывай)"
                     r"(?:[\s,!.]+(?:стивенс|stevens))?[\s,!.)]*", text, I):
-        result.intent = "thanks"
+        result.intent = "bye"
         return result
 
     # Благодарность: одна — thanks; с просьбой — выполняем просьбу (Р-124)
@@ -1151,6 +1192,14 @@ def parse(raw: str, now: datetime) -> Parse:
             return result
         text = rest
 
+    # «Напомни о ней за час» — за сколько до встречи прислать уведомление (Ф10)
+    if (only := REMIND_ONLY_RE.fullmatch(text)) and (before := remind_minutes(only["amount"])):
+        result.intent, result.ref, result.remind_before = "edit", True, before
+        return result
+    # «Встреча с Олегом завтра в 15, напомни за полчаса» — уведомление за 30 минут, из текста убираем
+    remind_before = None
+    if (before := REMIND_BEFORE_RE.search(text)) and before.start() > 0 and (value := remind_minutes(before["amount"])):
+        text, remind_before = " ".join((text[:before.start()] + " " + text[before.end():]).split()).strip(" ,"), value
     # «Работа с 9 до 18»: интервал вырезаем сразу, чтобы «до 18» не путало дату и время
     interval = parse_interval(text)
     if interval:
@@ -1163,7 +1212,7 @@ def parse(raw: str, now: datetime) -> Parse:
         time, ambiguous = interval[0], interval[2]
 
     if HELP_RE.search(lower):
-        result.intent = "help"
+        result.intent = "greeting" if GREETING_RE.match(lower) else "help"
         return result
 
     # «32 октября», «31 ноября» — такого дня нет, переспрашиваем, а не молча берём сегодня
@@ -1378,6 +1427,13 @@ def parse(raw: str, now: datetime) -> Parse:
     result.type = "busy" if is_busy else "meeting" if is_meeting else "reminder" if is_reminder else "task"
     if interval and result.type in ("busy", "meeting"):
         result.end_time = interval[1]
+    result.remind_before = remind_before if result.type == "meeting" else None
+    if not time and result.type in ("meeting", "reminder") and (part := DAY_PART_TIME_RE.search(lower)) \
+            and not any(re.search(v, lower) for v, _ in VAGUE_TIME):
+        # «Утром / днём / вечером» без часа — 9:00 / 13:00 / 19:00, и говорим, что поставили (Ф5)
+        word = part.group(1).replace("днем", "днём")
+        time, ambiguous = DAY_PART_TIME[word]
+        result.time_guess, result.part_word = "day_part", DAY_PART_WORD[word]
     result.time = time
     result.time_ambiguous = ambiguous
     result.date = info.date
@@ -1606,7 +1662,7 @@ def parse_edit(text: str, now: datetime) -> Parse | None:
 
 
 CANCEL_REPLY_RE = re.compile(
-    r"^(?:стоп|стой|отмена|отмени(?:ть)?|не\s+надо|забудь|убери\s+вс[её]|ничего\s+не\s+надо)[\s.!,]*$", I)
+    r"^(?:стоп|стой|отмена|отмени(?:ть)?|не\s+надо|забудь|убери\s+вс[её]|ничего\s+не\s+надо|хватит|остановись)[\s.!,]*$", I)
 REPLY_TIME_RE = re.compile(r"(?<![\d:.])(\d{1,2})(?:[:.](\d{2}))?(?![\d:.])(?!\s*(?:" + "|".join(
     ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября",
      "декабря", "числа", "минут", "час", "дн", "недел"]) + r"))", I)

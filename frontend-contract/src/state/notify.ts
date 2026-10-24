@@ -1,28 +1,39 @@
 /**
- * Уведомления о напоминаниях и встречах.
+ * Уведомления о напоминаниях и встречах (контракт v1.5, Ф10).
  * После первого созданного напоминания под ответом — плашка «Прислать уведомление в 10:00?».
- * Напоминание приходит в своё время, встреча — за 10 минут.
- * Как в мессенджере: человек не на вкладке — пуш (с сервера через public/sw.js, а если вкладка
- * открыта в фоне — ещё и отсюда, с тем же tag, браузер склеит), на вкладке — пуша нет,
- * только сообщение Стивенса в ленте и тихий звук двумя нотами.
- * Вернулся на вкладку или открыл по пушу — в ленте сообщение Стивенса о том, что подошло без него.
+ * Напоминание приходит в своё время, встреча — за remind_before минут (по умолчанию 15).
+ * Человек не на вкладке — пуш (с сервера через public/sw.js, а если вкладка открыта в фоне — ещё и
+ * отсюда, с тем же tag, браузер склеит). На вкладке — пуша нет: сверху карточка уведомления
+ * с «Посмотреть» и «Через 10 минут» и тихий звук двумя нотами; чат она не трогает.
+ * «Посмотреть», клик по пушу или возврат на вкладку — в ленте сообщение Стивенса с записью.
+ * Меню: «Уведомления: включить / выключить».
  * Звонят только записи, заведённые человеком: демо-записи песочницы помечены demo.
  * У пуша кнопки «Посмотреть» (Стивенс присылает запись в чат) и «Через 10 минут» — см. public/sw.js.
  */
 import { api } from '../api';
+import { serverHas } from '../config/server';
 import type { RecordItem } from '../api/types';
 import { T } from '../content/texts';
 import { timezone } from '../lib/clock';
+import { pluralKey } from '../lib/dates';
 import { uuid } from '../lib/uuid';
 import { storage } from '../storage';
-import { onAssistantResponse, onRecordsChanged } from './events';
+import { emitActivity, onAssistantResponse, onRecordsChanged } from './events';
 import { createStore, lastAnswerId, store } from './store';
 
 type PushMessage = { type?: string; recordId?: number; snoozed?: boolean };
 
-export const notifyStore = createStore<{ offer: { messageId: string; time: string } | null }>({ offer: null });
+export type NotifyCard = { record: RecordItem; title: string; tag: string };
 
-const MEETING_EARLY_MIN = 10;
+export const notifyStore = createStore<{
+  offer: { messageId: string; time: string } | null;
+  card: NotifyCard | null;
+  /** Пункт меню: включены ли уведомления (разрешение есть и человек их не выключал) */
+  on: boolean;
+}>({ offer: null, card: null, on: false });
+
+const MEETING_EARLY_MIN = 15;
+const CARD_MS = 10 * 1000;
 const SNOOZE_MS = 10 * 60 * 1000;
 const RESCAN_MS = 30 * 60 * 1000;
 /** Насколько назад смотреть пропущенное при открытии */
@@ -31,6 +42,10 @@ const timers = new Map<string, ReturnType<typeof setTimeout>>();
 
 const supported = () => typeof window !== 'undefined' && 'Notification' in window;
 export const notifyGranted = () => supported() && Notification.permission === 'granted';
+/** Уведомления включены: разрешение дано и в меню их не выключали */
+const notifyOn = () => notifyGranted() && !storage.notifyDeclined();
+const refreshOn = () => notifyStore.set({ on: notifyOn() });
+const earlyMin = (record: RecordItem) => record.remind_before ?? MEETING_EARLY_MIN;
 
 function isoDay(d: Date): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -43,7 +58,7 @@ function fireAt(record: RecordItem): number | null {
   const [h, m] = record.time.split(':').map(Number);
   const [y, mo, d] = record.date.split('-').map(Number);
   const at = new Date(y, mo - 1, d, h, m).getTime();
-  return record.type === 'meeting' ? at - MEETING_EARLY_MIN * 60 * 1000 : at;
+  return record.type === 'meeting' ? at - earlyMin(record) * 60 * 1000 : at;
 }
 
 function chime(): void {
@@ -109,14 +124,69 @@ function remindInFeed(records: RecordItem[], text: string): void {
   }));
 }
 
+/** «Через 15 минут у вас встреча.» с числом минут этой встречи */
+function meetingTitle(record: RecordItem): string {
+  const minutes = earlyMin(record);
+  const word = minutes === 30 ? 'полчаса' : minutes === 60 ? 'час' : `${minutes} ${{ one: 'минуту', few: 'минуты', many: 'минут' }[pluralKey(minutes)]}`;
+  return T.remind_meeting.replace('15 минут', word);
+}
+
+function titleOf(record: RecordItem, again: boolean): string {
+  if (again) return T.remind_again;
+  return record.type === 'meeting' ? meetingTitle(record) : T.remind_one;
+}
+
+let cardTimer: ReturnType<typeof setTimeout> | undefined;
+
+/** Карточка сверху на открытой вкладке: уходит сама через 10 с, чат, поле и микрофон не трогает */
+export function showNotifyCard(record: RecordItem, again = false): void {
+  clearTimeout(cardTimer);
+  notifyStore.set({ card: { record, title: titleOf(record, again), tag: keyOf(record) } });
+  chime();
+  cardTimer = setTimeout(() => notifyStore.set({ card: null }), CARD_MS);
+}
+
+export function closeNotifyCard(): void {
+  clearTimeout(cardTimer);
+  notifyStore.set({ card: null });
+}
+
+/** «Посмотреть» на карточке: сообщение Стивенса с записью в ленте */
+export function viewNotifyCard(): void {
+  const card = notifyStore.get().card;
+  closeNotifyCard();
+  if (card) remindInFeed([card.record], card.title);
+  emitActivity('notify-viewed');
+}
+
+/** «Через 10 минут» на карточке: откладывает сервер, если есть подписка, иначе сама вкладка */
+export async function snoozeNotifyCard(): Promise<void> {
+  const card = notifyStore.get().card;
+  closeNotifyCard();
+  const id = card?.record.id;
+  if (id === undefined || id === null) return;
+  try {
+    const subscription = await (await navigator.serviceWorker?.getRegistration())?.pushManager.getSubscription();
+    if (subscription) {
+      await api.pushSnooze(subscription.endpoint, id);
+      return;
+    }
+  } catch {
+    /* сервер не принял — отложим здесь */
+  }
+  snoozeHere(id);
+}
+
 function fire(record: RecordItem, key: string): void {
   const fired = storage.notifyFired();
-  if (fired.includes(key)) return;
+  if (fired.includes(key) || storage.notifyDeclined()) return;
   storage.setNotifyFired([...fired, key]);
-  const body = record.type === 'meeting' ? `Через ${MEETING_EARLY_MIN} минут: ${record.text}` : record.text;
-  remindInFeed([record], record.type === 'meeting' ? T.remind_meeting : T.remind_one);
-  if (document.visibilityState === 'visible') chime();
-  else if (notifyGranted() && record.id !== null) void systemNotify(body, key, record.id);
+  const title = titleOf(record, false);
+  if (document.visibilityState === 'visible') showNotifyCard(record);
+  else {
+    remindInFeed([record], title); // вернётся на вкладку — увидит в ленте
+    if (notifyGranted() && record.id !== null) void systemNotify(`${title}\n${record.text}`, key, record.id);
+  }
 }
 
 async function findRecord(id: number): Promise<RecordItem | null> {
@@ -138,8 +208,8 @@ async function showRecord(id: number, ring = false): Promise<void> {
   const key = keyOf(record);
   const fired = storage.notifyFired();
   if (!fired.includes(key)) storage.setNotifyFired([...fired, key]);
-  remindInFeed([record], record.type === 'meeting' && !ring ? T.remind_meeting : T.remind_one);
-  if (ring) chime();
+  if (ring) showNotifyCard(record, true);
+  else remindInFeed([record], titleOf(record, false));
 }
 
 /** «Через 10 минут», когда пуша с сервера нет: откладывает сама вкладка */
@@ -147,16 +217,18 @@ function snoozeHere(id: number): void {
   setTimeout(() => {
     void findRecord(id).then((record) => {
       if (!record || record.status === 'done' || record.marks.includes('deleted')) return;
-      remindInFeed([record], T.remind_one);
-      if (document.visibilityState === 'visible') chime();
-      else if (notifyGranted()) void systemNotify(record.text, keyOf(record), id);
+      if (document.visibilityState === 'visible') showNotifyCard(record, true);
+      else {
+        remindInFeed([record], T.remind_again);
+        if (notifyGranted()) void systemNotify(`${T.remind_again}\n${record.text}`, keyOf(record), id);
+      }
     });
   }, SNOOZE_MS);
 }
 
 /** Подписка на пуш с сервера: нужен service worker и разрешение на уведомления */
 async function subscribePush(): Promise<void> {
-  if (!notifyGranted() || !('serviceWorker' in navigator) || !('PushManager' in window)) return;
+  if (!notifyOn() || !('serviceWorker' in navigator) || !('PushManager' in window)) return;
   try {
     const registration = await navigator.serviceWorker.register('/sw.js');
     await navigator.serviceWorker.ready;
@@ -201,11 +273,11 @@ async function remindMissed(since: number | null, away = true): Promise<void> {
   if (!missed.length) return;
   storage.setNotifyFired([...fired, ...missed.map(keyOf)]);
   if (away) {
-    remindInFeed(missed, T.remind_missed);
+    remindInFeed(missed, missed.length === 1 ? titleOf(missed[0], false) : T.remind_one);
     return;
   }
-  remindInFeed(missed, missed.length === 1 && missed[0].type === 'meeting' ? T.remind_meeting : T.remind_one);
-  chime();
+  // Пуш пришёл, пока человек на вкладке: карточка сверху, а не сообщение в ленте
+  missed.forEach((record) => showNotifyCard(record));
 }
 
 /** Перестроить таймеры на сегодня и завтра */
@@ -221,6 +293,7 @@ export async function reschedule(): Promise<void> {
   }
   timers.forEach((t) => clearTimeout(t));
   timers.clear();
+  if (storage.notifyDeclined()) return;
   const fired = storage.notifyFired();
   for (const record of records) {
     const at = fireAt(record);
@@ -234,20 +307,46 @@ export async function reschedule(): Promise<void> {
 
 export async function acceptOffer(): Promise<void> {
   notifyStore.set({ offer: null });
-  if (!supported()) return;
-  const permission = await Notification.requestPermission();
-  if (permission === 'granted') {
-    void reschedule();
-    void subscribePush();
-  } else storage.setNotifyDeclined();
+  await enableNotify();
 }
 
 export function declineOffer(): void {
   notifyStore.set({ offer: null });
   storage.setNotifyDeclined();
+  refreshOn();
+}
+
+/** Меню «Уведомления: включить»: разрешение браузера → подписка на пуш */
+export async function enableNotify(): Promise<void> {
+  if (!supported()) return;
+  storage.clearNotifyDeclined();
+  const permission = Notification.permission === 'granted' ? 'granted' : await Notification.requestPermission();
+  if (permission === 'granted') {
+    void reschedule();
+    void subscribePush();
+  } else storage.setNotifyDeclined();
+  refreshOn();
+}
+
+/** Меню «Уведомления: выключить»: POST /api/push/unsubscribe и отписка в браузере */
+export async function disableNotify(): Promise<void> {
+  storage.setNotifyDeclined();
+  timers.forEach((t) => clearTimeout(t));
+  timers.clear();
+  refreshOn();
+  try {
+    const subscription = await (await navigator.serviceWorker?.getRegistration())?.pushManager.getSubscription();
+    if (subscription) {
+      await api.pushUnsubscribe(subscription.endpoint).catch(() => undefined);
+      await subscription.unsubscribe();
+    }
+  } catch {
+    /* отписка в браузере не удалась — сервер уже не шлёт */
+  }
 }
 
 export function initNotify(): void {
+  refreshOn();
   // Время прошлого визита — до того, как его отметит брифинг
   const previous = storage.lastSeen();
   onAssistantResponse((response) => {
@@ -259,7 +358,7 @@ export function initNotify(): void {
     if (response.kind !== 'created') return;
     void reschedule();
     if (notifyGranted()) return;
-    if (!supported() || Notification.permission !== 'default' || storage.notifyDeclined()) return;
+    if (!serverHas('f10') || !supported() || Notification.permission !== 'default' || storage.notifyDeclined()) return;
     const record = response.records.find((r) => fireAt(r) !== null && (fireAt(r) ?? 0) > Date.now());
     const messageId = lastAnswerId(store.get().messages);
     if (record?.time && messageId) notifyStore.set({ offer: { messageId, time: record.time } });

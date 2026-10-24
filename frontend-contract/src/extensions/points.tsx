@@ -2,9 +2,10 @@
  * Точки расширения — 09-extensions.md, раздел 2. Флаг проверяется только здесь;
  * код допа грузится динамическим импортом. Флаги выключены — точки пусты.
  */
-import { lazy, Suspense, type ReactNode } from 'react';
+import { lazy, Suspense, useSyncExternalStore, type ReactNode } from 'react';
 import type { RecordItem } from '../api/types';
 import { features } from '../config/features';
+import { serverFeatures, serverHas, type ServerFeature } from '../config/server';
 import { store, type AnswerMessage } from '../state/store';
 
 const calendar = () => import('../extras/calendar');
@@ -25,14 +26,22 @@ const DeletedLabel =
 
 const wrap = (node: ReactNode) => <Suspense fallback={null}>{node}</Suspense>;
 
-/** Д6: кнопка календаря в шапке */
-export function HeaderRightStart() {
-  return CalendarToggle ? wrap(<CalendarToggle />) : null;
+/** Фича включена на сервере (GET /api/health): нет — места на экране не занимает */
+function useServer(key: ServerFeature): boolean {
+  useSyncExternalStore(serverFeatures.subscribe, serverFeatures.get);
+  return serverHas(key);
 }
 
-/** Д6: панель календаря справа */
+/** Д6 / Ф13: кнопка календаря в шапке */
+export function HeaderRightStart() {
+  const on = useServer('f13');
+  return CalendarToggle && on ? wrap(<CalendarToggle />) : null;
+}
+
+/** Д6 / Ф13: панель календаря справа */
 export function LayoutSidePanel() {
-  return CalendarPanel ? wrap(<CalendarPanel canComplete={features.d3_complete} canDelete={features.d2_delete} />) : null;
+  const on = useServer('f13');
+  return CalendarPanel && on ? wrap(<CalendarPanel canComplete={features.d3_complete} canDelete={features.d2_delete} />) : null;
 }
 
 /** Д10: «Исправить» первой в ряду кнопок ответа created с одной записью; активна только у последнего */
@@ -85,5 +94,5 @@ export function BottomTop() {
 
 /** Д15: «Пройти обучение» в меню песочницы */
 export function sandboxMenuExtra(label: string): { label: string; onSelect: () => void }[] {
-  return features.d15_tour ? [{ label, onSelect: () => void import('../extras/tour/state').then((m) => m.startTour()) }] : [];
+  return features.d15_tour && serverHas('f23') ? [{ label, onSelect: () => void import('../extras/tour/state').then((m) => m.startTour()) }] : [];
 }

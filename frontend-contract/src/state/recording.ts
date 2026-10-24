@@ -1,4 +1,5 @@
 /** Запись голоса для строки ввода — 03-behavior.md, раздел 6. */
+import { api } from '../api';
 import { T } from '../content/texts';
 import { voice, type VoiceError } from '../voice';
 import { applyCorrections } from '../voice/edit';
@@ -9,8 +10,8 @@ import { createStore, store } from './store';
 /** Быстро меняющееся — отдельно, чтобы не перерисовывать всё приложение */
 export const recordingStore = createStore({ transcript: '', level: 0, startedAt: 0 });
 
-/** Д13: столько ждём первого слова после уточнения — человеку нужно время подумать */
-const AUTO_SILENCE_MS = 8000;
+/** Ф9: столько ждём первого слова после вопроса (контракт v1.5) */
+const AUTO_SILENCE_MS = 4000;
 
 let prefix = '';
 let auto = false;
@@ -29,6 +30,7 @@ export function startRecording(options: { auto?: boolean } = {}): void {
   const state = store.get();
   if (state.waiting || state.recording) return;
   if (!voice.isSupported()) {
+    api.log('mic_failed', 'unsupported');
     setHint('voice_unsupported');
     return;
   }
@@ -107,14 +109,17 @@ function refusedOffer(text: string): boolean {
 }
 
 voice.on('final', (text) => {
-  const full = applyCorrections([prefix, text].filter(Boolean).join(' '));
+  const raw = [prefix, text].filter(Boolean).join(' ');
+  const full = applyCorrections(raw);
   store.set({ input: '' });
   if (!prefix && refusedOffer(full)) return;
-  if (!send(full, 'voice')) store.set({ input: full });
+  // raw_text — что распознал браузер до поправок ослышки: только для журнала (Ф4)
+  if (!send(full, 'voice', { rawText: raw })) store.set({ input: full });
 });
 
 voice.on('error', (error) => {
   store.set({ input: prefix });
+  if (error !== 'no-speech') api.log('mic_failed', error); // Ф0: любой отказ микрофона — в журнал
   // Д13: сам включился — сам и молчит об ошибках (Safari может не дать слушать без нажатия)
   if (auto) return;
   setHint(ERROR_HINT[error]);

@@ -13,6 +13,9 @@ from sqlalchemy.orm import Mapped, mapped_column
 from app.database import Base
 
 
+REMIND_BEFORE_DEFAULT = 15  # встреча напоминает за 15 минут, если не сказали иначе
+
+
 class TaskType(str, enum.Enum):
     task = "task"
     meeting = "meeting"
@@ -103,6 +106,8 @@ class Record(Base):
     date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # "YYYY-MM-DD"
     time: Mapped[str | None] = mapped_column(String(5), nullable=True)   # "HH:MM"
     end_time: Mapped[str | None] = mapped_column(String(5), nullable=True)  # "HH:MM": до скольки, у занятости
+    # Встреча: за сколько минут прислать уведомление; None — по умолчанию (REMIND_BEFORE_DEFAULT)
+    remind_before: Mapped[int | None] = mapped_column(Integer, nullable=True)
     date_kind: Mapped[DateKind] = mapped_column(Enum(DateKind, name="record_date_kind"), nullable=False)
     status: Mapped[TaskStatus | None] = mapped_column(Enum(TaskStatus, name="record_status"), nullable=True)
     created_at: Mapped[dt | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -112,6 +117,10 @@ class Record(Base):
     repeat: Mapped[str | None] = mapped_column(String(24), nullable=True)
     # Демо-данные песочницы из CSV: время создания у них есть, но уведомления по ним не звонят
     demo: Mapped[bool] = mapped_column(Boolean, default=False, server_default="false", nullable=False)
+
+    def remind_minutes(self) -> int:
+        """За сколько минут до встречи уведомление (контракт v1.5: по умолчанию 15)."""
+        return self.remind_before if self.remind_before is not None else REMIND_BEFORE_DEFAULT
 
     def repeat_contract(self) -> dict | None:
         if not self.repeat:
@@ -128,6 +137,7 @@ class Record(Base):
             "date": self.date,
             "time": self.time,
             "end_time": self.end_time,
+            "remind_before": self.remind_minutes() if self.type == TaskType.meeting else None,
             "date_kind": self.date_kind.value,
             "status": self.status.value if self.status else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,
@@ -180,6 +190,17 @@ class AppSetting(Base):
     value: Mapped[str] = mapped_column(String(4000), nullable=False)
 
 
+class ClientLog(Base):
+    """Сбои сайта (POST /api/log): микрофон, автослушание, озвучка, переход на серверное распознавание."""
+    __tablename__ = "client_log"
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    at: Mapped[dt] = mapped_column(DateTime(timezone=True), server_default=func.now(), index=True)
+    who: Mapped[str] = mapped_column(String(16), index=True)
+    event: Mapped[str] = mapped_column(String(64), index=True)
+    detail: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
 class ChatLog(Base):
     """Журнал чата: что спросили и что ответил Stevens — чтобы видеть, где он ошибается."""
     __tablename__ = "chat_log"
@@ -190,6 +211,7 @@ class ChatLog(Base):
     conversation_id: Mapped[str] = mapped_column(String(64), index=True)
     source: Mapped[str] = mapped_column(String(8))                    # voice | text | button
     text: Mapped[str] = mapped_column(String(300), default="")
+    raw_text: Mapped[str | None] = mapped_column(String(600), nullable=True)  # голос: что распознал браузер до поправок
     action: Mapped[str | None] = mapped_column(String(32), nullable=True)
     waiting: Mapped[str | None] = mapped_column(String(16), nullable=True)   # чего Stevens ждал до запроса
     intent: Mapped[str | None] = mapped_column(String(16), nullable=True)

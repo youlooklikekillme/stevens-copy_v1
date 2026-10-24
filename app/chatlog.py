@@ -26,7 +26,7 @@ async def write(owner, payload, answer: dict, trace: dict, waiting: str | None, 
         async with AsyncSessionLocal() as db:
             db.add(ChatLog(
                 who=who(owner), conversation_id=payload.conversation_id[:64], source=payload.source,
-                text=(payload.text or "")[:300], action=payload.action.id[:32] if payload.action else None,
+                text=(payload.text or "")[:300], raw_text=(payload.raw_text or "")[:600] or None, action=payload.action.id[:32] if payload.action else None,
                 waiting=waiting, intent=trace.get("intent"), llm=bool(trace.get("llm")),
                 kind=answer.get("kind", "")[:16], template=(trace.get("template") or "")[:48] or None,
                 reply=answer.get("text", ""), records=len(answer.get("records") or []), ms=ms,

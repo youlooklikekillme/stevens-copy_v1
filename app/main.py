@@ -12,7 +12,8 @@ from app import models  # noqa: F401 — таблицы для create_all
 from app.database import Base, engine, get_db
 from app.owner import CLIENT_ID_RE, clean_loop, ensure_sandbox, seed_sandbox
 from app import push
-from app.routers import auth, chat, records
+from app import features
+from app.routers import auth, chat, client, records
 from app.routers import push as push_router
 
 
@@ -30,6 +31,8 @@ async def lifespan(app: FastAPI):
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS repeat VARCHAR(24)")
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS end_time VARCHAR(5)")
         await conn.exec_driver_sql("ALTER TABLE series ADD COLUMN IF NOT EXISTS end_time VARCHAR(5)")
+        await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS remind_before INTEGER")
+        await conn.exec_driver_sql("ALTER TABLE chat_log ADD COLUMN IF NOT EXISTS raw_text VARCHAR(600)")
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false")
         await conn.exec_driver_sql("CREATE INDEX IF NOT EXISTS ix_records_series_id ON records (series_id)")
         await conn.exec_driver_sql("ALTER TABLE sandboxes ADD COLUMN IF NOT EXISTS seen_at TIMESTAMPTZ NOT NULL DEFAULT now()")
@@ -45,7 +48,7 @@ async def lifespan(app: FastAPI):
     await engine.dispose()
 
 
-app = FastAPI(title="Stevens API", version="1.4.0", lifespan=lifespan)
+app = FastAPI(title="Stevens API", version="1.5.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -71,11 +74,12 @@ app.include_router(auth.router)
 app.include_router(chat.router)
 app.include_router(records.router)
 app.include_router(push_router.router)
+app.include_router(client.router)
 
 
 @app.get("/api/health")
 async def health():
-    return {"status": "ok"}
+    return {"status": "ok", "features": features.enabled()}
 
 
 @app.post("/api/sandbox/reset", status_code=204)

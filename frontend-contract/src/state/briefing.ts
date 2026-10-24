@@ -3,6 +3,7 @@
  * а человек не заходил несколько часов: в пустом чате вместо примеров, в непустом — в конце ленты.
  * «Да» — действие briefing без сообщения пользователя, «Нет» — плашка уходит до следующего долгого перерыва.
  */
+import { serverFeatures, serverHas } from '../config/server';
 import { useSyncExternalStore } from 'react';
 import { api } from '../api';
 import { storage } from '../storage';
@@ -17,7 +18,9 @@ const SEEN_EVERY_MS = 60 * 1000;
 export const briefingStore = createStore<{ offer: { count: number } | null }>({ offer: null });
 
 export function useBriefingOffer() {
-  return useSyncExternalStore(briefingStore.subscribe, briefingStore.get).offer;
+  const offer = useSyncExternalStore(briefingStore.subscribe, briefingStore.get).offer;
+  useSyncExternalStore(serverFeatures.subscribe, serverFeatures.get);
+  return serverHas('f18') ? offer : null; // Ф18 выключен на сервере — плашки нет
 }
 
 function today(): string {

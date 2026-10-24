@@ -9,6 +9,7 @@ const recordSchema = z.object({
   date: z.string().nullable(),
   time: z.string().nullable(),
   end_time: z.string().nullable().optional().default(null),
+  remind_before: z.number().nullable().optional().default(null),
   date_kind: z.enum(['exact', 'deadline', 'none']),
   status: z.enum(['open', 'done']).nullable(),
   created_at: z.string().nullable(),

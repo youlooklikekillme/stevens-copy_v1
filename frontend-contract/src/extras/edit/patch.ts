@@ -1,7 +1,7 @@
 /** Проверка формы правки и изменённые поля — 07-extras.md, раздел 1; контракт v1.4, 15.5. */
 import type { RecordItem, RecordPatch } from '../../api/types';
 
-export type EditValues = { text: string; date: string; time: string; end?: string };
+export type EditValues = { text: string; date: string; time: string; end?: string; remindBefore?: number };
 export type EditErrors = { text?: 'edit_err_text'; datetime?: 'edit_err_datetime' | 'edit_err_interval' };
 
 export function validate(record: RecordItem, values: EditValues): EditErrors {
@@ -34,5 +34,8 @@ export function buildPatch(record: RecordItem, values: EditValues): RecordPatch 
   }
   const end = values.end || null;
   if (values.end !== undefined && end !== (record.end_time ?? null)) patch.end_time = end;
+  if (values.remindBefore !== undefined && values.remindBefore !== (record.remind_before ?? 15)) {
+    patch.remind_before = values.remindBefore;
+  }
   return patch;
 }

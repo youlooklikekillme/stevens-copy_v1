@@ -17,3 +17,4 @@ class ChatRequest(BaseModel):
     action: Optional[Action] = None
     client_time: Optional[str] = None
     timezone: Optional[str] = None
+    raw_text: Optional[str] = Field(default=None, max_length=600)  # голос до поправок ослышки — только для журнала

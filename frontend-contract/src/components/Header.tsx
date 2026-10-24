@@ -1,12 +1,14 @@
 /** Шапка — 02-screens.md, 2.1. */
 import { ChevronDown, Plus } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { features } from '../config/features';
+import { serverHas } from '../config/server';
 import { T } from '../content/texts';
 import { HeaderRightStart, sandboxMenuExtra } from '../extensions/points';
 import { install, installHintKey, isInstalled, useCanInstall, useMedia, useTitlebarMode } from '../lib/install';
 import { newDialog, resetSandbox, setHint } from '../state/chat';
 import { emitActivity } from '../state/events';
+import { disableNotify, enableNotify, notifyStore } from '../state/notify';
 import { goAuth, logout } from '../state/session';
 import { useApp } from '../state/store';
 import { Menu } from './Menu';
@@ -28,8 +30,16 @@ export function Header() {
     ? []
     : [{ label: T.menu_install, onSelect: () => (canInstall ? void install() : setHint(installHintKey())) }];
 
+  // Ф10: «Уведомления: включить / выключить»; нет f10 на сервере или браузер не умеет — пункта нет
+  const notifyOn = useSyncExternalStore(notifyStore.subscribe, () => notifyStore.get().on);
+  const notifyItem = serverHas('f10') && typeof window !== 'undefined' && 'Notification' in window
+    ? [{ label: notifyOn ? T.menu_notify_off : T.menu_notify_on,
+         onSelect: () => void (notifyOn ? disableNotify() : enableNotify()) }]
+    : [];
+
   const sandboxItems = [
     ...sandboxMenuExtra(T.menu_tour),
+    ...notifyItem,
     { label: T.menu_reset_sandbox, onSelect: () => setDialog('reset') },
     ...installItem,
     ...(features.auth ? [{ label: T.menu_go_auth, onSelect: goAuth }] : []),
@@ -52,7 +62,7 @@ export function Header() {
       {mode === 'account' && features.auth && (
         <Menu
           heading={login ?? ''}
-          items={[...installItem, { label: T.menu_logout, onSelect: logout }]}
+          items={[...notifyItem, ...installItem, { label: T.menu_logout, onSelect: logout }]}
           trigger={({ open, toggle }) => (
             <button type="button" className="avatar" aria-label={T.profile_label} aria-haspopup="menu" aria-expanded={open} onClick={toggle}>
               {(login ?? '?').charAt(0).toUpperCase()}

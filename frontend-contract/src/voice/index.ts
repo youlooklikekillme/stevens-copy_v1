@@ -14,6 +14,8 @@
  * Его собственный голос из динамиков тоже попадает в микрофон: если в его фразе есть имя, пока он говорит,
  * имя не ловим (setEcho), а после фразы перезапускаем фоновую запись, чтобы старый текст не сработал.
  */
+import { api } from '../api';
+import { serverHas } from '../config/server';
 import { isCancel } from './edit';
 
 export type VoiceError = 'denied' | 'no-mic' | 'no-speech' | 'failed' | 'service';
@@ -328,6 +330,62 @@ function arm(inGesture = false): void {
   }
 }
 
+// ── Распознавание на сервере (Ф4): браузер не умеет, а сервер умеет (stt в features) ──
+let serverRec: MediaRecorder | null = null;
+/** Уровень громкости выше этого — человек говорит; после речи 1,8 с тишины — конец фразы */
+const SPEECH_LEVEL = 0.12;
+
+function serverSttReady(): boolean {
+  return serverHas('stt') && typeof MediaRecorder !== 'undefined' && !!navigator.mediaDevices?.getUserMedia;
+}
+
+async function startServer(reason: string): Promise<void> {
+  if (serverRec || recognition) return;
+  api.log('stt_fallback', reason);
+  cancelled = false;
+  let media: MediaStream;
+  try {
+    media = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true } });
+  } catch (error) {
+    const name = error instanceof DOMException ? error.name : '';
+    emit('error', name === 'NotAllowedError' ? 'denied' : name === 'NotFoundError' ? 'no-mic' : 'failed');
+    return;
+  }
+  permissionGranted = true;
+  const type = ['audio/ogg;codecs=opus', 'audio/webm;codecs=opus'].find((t) => MediaRecorder.isTypeSupported(t));
+  const rec = new MediaRecorder(media, type ? { mimeType: type } : undefined);
+  serverRec = rec;
+  stream = media;
+  const chunks: Blob[] = [];
+  let spoke = false;
+  rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
+  rec.onstop = () => {
+    serverRec = null;
+    cleanupAudio();
+    emit('state', 'idle');
+    if (cancelled) return;
+    if (!spoke || !chunks.length) {
+      emit('error', 'no-speech');
+      return;
+    }
+    void api.stt(new Blob(chunks, { type: rec.mimeType || type || 'audio/webm' }))
+      .then((text) => (text.trim() ? emit('final', text.trim()) : emit('error', 'no-speech')))
+      .catch(() => emit('error', 'failed'));
+  };
+  const off = voice.on('level', (level) => {
+    if (serverRec !== rec) { off(); return; }
+    if (level > SPEECH_LEVEL) {
+      spoke = true;
+      clearTimeout(silenceTimer);
+      silenceTimer = setTimeout(() => { if (rec.state !== 'inactive') rec.stop(); }, SILENCE_MS);
+    }
+  });
+  rec.start();
+  startLevel(media);
+  maxTimer = setTimeout(() => { if (rec.state !== 'inactive') rec.stop(); }, MAX_MS);
+  emit('state', 'recording');
+}
+
 /** Остановить фоновую запись и дождаться, пока браузер отпустит микрофон */
 async function disarmAndWait(): Promise<void> {
   clearTimeout(rearmTimer);
@@ -340,7 +398,13 @@ async function disarmAndWait(): Promise<void> {
 
 export const voice = {
   isSupported(): boolean {
-    return typeof window !== 'undefined' && ctor() !== null && !!navigator.mediaDevices?.getUserMedia;
+    if (typeof window === 'undefined') return false;
+    return (ctor() !== null && !!navigator.mediaDevices?.getUserMedia) || serverSttReady();
+  },
+
+  /** Запись идёт (браузерная или серверная) */
+  isActive(): boolean {
+    return recognition !== null || serverRec !== null;
   },
 
   /** Разрешение на микрофон уже дано (для Д13) */
@@ -350,7 +414,11 @@ export const voice = {
 
   async start(): Promise<void> {
     const Ctor = ctor();
-    if (!Ctor || recognition) return;
+    if (!Ctor && serverSttReady()) {
+      await startServer('no SpeechRecognition');
+      return;
+    }
+    if (!Ctor || recognition || serverRec) return;
     // Только если фоном слушали имя: иначе ждать нечего, а Safari запускает распознавание лишь прямо в нажатии
     if (armedRec) await disarmAndWait();
     if (recognition) return;
@@ -401,6 +469,13 @@ export const voice = {
       if (event.error === 'no-speech') return; // сообщим в onend
       if (event.error === 'aborted') return;
       cancelled = true;
+      if (ERRORS[event.error] === 'service' && serverSttReady()) {
+        // Safari отказал в русской речи — переходим на распознавание на сервере
+        release(rec);
+        try { rec.abort(); } catch { /* уже остановлена */ }
+        void startServer(event.error);
+        return;
+      }
       emit('error', ERRORS[event.error] ?? 'failed');
       // Не разрешили микрофон: запись не начнётся, а onend может и не прийти — отпускаем сразу,
       // иначе кнопка остаётся в записи и не выключается до перезагрузки страницы
@@ -432,6 +507,10 @@ export const voice = {
 
   /** Остановить и отдать распознанное */
   stop(): void {
+    if (serverRec) {
+      if (serverRec.state !== 'inactive') serverRec.stop();
+      return;
+    }
     const rec = recognition;
     if (!rec) return;
     rec.stop();
@@ -441,6 +520,10 @@ export const voice = {
   /** Отменить: ничего не отдавать */
   cancel(): void {
     cancelled = true;
+    if (serverRec) {
+      if (serverRec.state !== 'inactive') serverRec.stop();
+      return;
+    }
     const rec = recognition;
     if (!rec) {
       cleanupAudio();

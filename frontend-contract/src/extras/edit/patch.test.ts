@@ -17,6 +17,12 @@ describe('edit form', () => {
     expect(buildPatch(task, { text: 'Отчёт', date: '2026-10-22', time: '12:00' })).toEqual({ time: '12:00' });
     expect(buildPatch(task, { text: 'Отчёт', date: '', time: '' })).toEqual({ date: null, time: null });
   });
+  it('meeting sends remind_before only when changed', () => {
+    const meeting: RecordItem = { ...task, type: 'meeting', status: null, remind_before: 15 };
+    const same = { text: 'Отчёт', date: '2026-10-22', time: '10:00' };
+    expect(buildPatch(meeting, { ...same, remindBefore: 15 })).toEqual({});
+    expect(buildPatch(meeting, { ...same, remindBefore: 30 })).toEqual({ remind_before: 30 });
+  });
   it('validates', () => {
     expect(validate(task, { text: ' ', date: '', time: '' })).toEqual({ text: 'edit_err_text' });
     expect(validate(task, { text: 'a', date: '', time: '10:00' })).toEqual({ datetime: 'edit_err_datetime' });

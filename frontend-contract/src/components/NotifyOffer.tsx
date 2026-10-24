@@ -13,8 +13,8 @@ export function NotifyOffer({ messageId }: { messageId: string }) {
       <div className="notify-offer__title">{fill(T.notify_title, { time: offer.time })}</div>
       <div className="notify-offer__text">{T.notify_text}</div>
       <div className="notify-offer__actions">
-        <Pill variant="primary" onClick={() => { emitActivity('button-press'); void acceptOffer(); }}>{T.wake_yes}</Pill>
-        <Pill variant="secondary" onClick={() => { emitActivity('button-press'); declineOffer(); }}>{T.wake_no}</Pill>
+        <Pill variant="primary" onClick={() => { emitActivity('button-press'); void acceptOffer(); }}>{T.notify_yes}</Pill>
+        <Pill variant="secondary" onClick={() => { emitActivity('button-press'); declineOffer(); }}>{T.notify_no}</Pill>
       </div>
     </div>
   );

@@ -70,12 +70,16 @@ async def report(days: int) -> None:
             SELECT text, error FROM chat_log WHERE {since} AND error IS NOT NULL
             ORDER BY at DESC LIMIT {TOP}""", days),
             lambda r: f"«{r[0]}»: {r[1][:120]}")
+        section("Сбои сайта по видам (микрофон, автослушание, озвучка, серверное распознавание)", await rows(conn, f"""
+            SELECT event, count(*), max(detail) FROM client_log WHERE {since}
+            GROUP BY event ORDER BY 2 DESC LIMIT {TOP}""", days),
+            lambda r: f"{r[0]}: {r[1]} (например: {r[2] or '—'})")
 
 
 async def export(days: int) -> None:
     async with engine.connect() as conn:
         result = await conn.execute(text(
-            "SELECT at, who, conversation_id, source, text, action, waiting, intent, llm, kind, template, "
+            "SELECT at, who, conversation_id, source, text, raw_text, action, waiting, intent, llm, kind, template, "
             "reply, records, ms, error FROM chat_log WHERE at > now() - make_interval(days => :days) ORDER BY at"),
             {"days": days})
         out = csv.writer(sys.stdout)

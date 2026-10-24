@@ -1,0 +1,6827 @@
+{
+ "meta": {
+  "clock": "2026-10-21T10:00:00+03:00",
+  "timezone": "Europe/Moscow",
+  "how": "Каждый диалог — с новым conversation_id. mode sandbox — песочница после /api/sandbox/reset, account — новый пустой аккаунт. say — текст, press — нажать кнопку с такой надписью из прошлого ответа. kind обязателен; record — первая запись с меткой new, deleted или draft (тип, текст, дата, время); text — ответ сайта-эталона, сверять по смыслу, не дословно."
+ },
+ "dialogs": [
+  {
+   "id": "Т5-1",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни завтра в 10 подготовить отчёт",
+     "kind": "created",
+     "template": "created_reminder",
+     "record": {
+      "type": "reminder",
+      "text": "Подготовить отчёт",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: завтра в 10:00 — «Подготовить отчёт».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-2",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь задачу на пятницу: отправить договор Ивану",
+     "kind": "created",
+     "template": "created_task",
+     "record": {
+      "type": "task",
+      "text": "Отправить договор Ивану",
+      "date": "2026-10-23",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Записал задачу на пт, 23 окт: «Отправить договор Ивану».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-3",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни послезавтра в 9 проверить смету",
+     "kind": "created",
+     "template": "created_reminder",
+     "record": {
+      "type": "reminder",
+      "text": "Проверить смету",
+      "date": "2026-10-23",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на пт, 23 окт в 09:00 сохранил: «Проверить смету».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-4",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь задачу на понедельник обновить материалы по CRM",
+     "kind": "created",
+     "template": "created_task",
+     "record": {
+      "type": "task",
+      "text": "Обновить материалы по CRM",
+      "date": "2026-10-26",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Записал задачу на пн, 26 окт: «Обновить материалы по CRM».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-5",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни сегодня в 18 позвонить Сергею",
+     "kind": "created",
+     "template": "created_reminder",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Сергею",
+      "date": "2026-10-21",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на сегодня в 18:00: «Позвонить Сергею».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-6",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Созвон с Марией в среду в 15:00",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Марией",
+      "date": "2026-10-21",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: сегодня в 15:00 — «Созвон с Марией».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-7",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с командой послезавтра в 11",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с командой",
+      "date": "2026-10-23",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с командой» на пт, 23 окт в 11:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-8",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Натальей по CRM на завтра в 12",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Натальей по CRM",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Натальей по CRM» на завтра в 12:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-9",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запланируй планёрку с Альфой по бюджету в понедельник в 10",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка с Альфой по бюджету",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Планёрка с Альфой по бюджету», пн, 26 окт в 10:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-10",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Демо проекта в четверг в 16:00",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Демо проекта",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Демо проекта» на завтра в 16:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-11",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Иваном завтра",
+     "kind": "clarify",
+     "template": "clarify_meeting_time",
+     "text": "Укажите, пожалуйста, время встречи.",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-12",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни про отчёт",
+     "kind": "clarify",
+     "template": "clarify_reminder_when",
+     "text": "Назовите день и время напоминания.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-13",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Созвон с партнёром в 14:00",
+     "kind": "clarify",
+     "template": "clarify_day",
+     "text": "Уточните, пожалуйста, день.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-14",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу на пятницу в 15",
+     "kind": "clarify",
+     "template": "clarify_meeting_person",
+     "text": "С кем или о чём будет встреча?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-15",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни на следующей неделе согласовать презентацию",
+     "kind": "clarify",
+     "template": "clarify_reminder_when",
+     "text": "Назовите день и время напоминания.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т7-1",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что у меня сегодня?",
+     "kind": "list",
+     "template": "list_some",
+     "text": "Вот ваши планы на сегодня: 2 дела.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-2",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Какие планы на сегодня?",
+     "kind": "list",
+     "template": "list_some",
+     "text": "Вот ваши планы на сегодня: 2 дела.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-3",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Покажи мои встречи на завтра",
+     "kind": "list",
+     "template": "list_type_empty",
+     "text": "Завтра у вас нет встреч. Ближайшее — сб, 24 окт в 20:45: «Встреча с Марией по интеграции».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-1",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Найди задачу по договору",
+     "kind": "found",
+     "template": "found_some",
+     "text": "Нашлось 75 совпадений:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-2",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Когда у меня встреча с Марией?",
+     "kind": "found",
+     "template": "found_when_next",
+     "text": "Ближайший раз — сб, 24 окт в 20:45: «Встреча с Марией по интеграции».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-4",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что у меня было в прошлую пятницу?",
+     "kind": "list",
+     "template": "list_some",
+     "text": "На пт, 16 окт — 1 дело:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-16",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь задачу купить билеты до конца недели",
+     "kind": "created",
+     "template": "created_task_deadline",
+     "record": {
+      "type": "task",
+      "text": "Купить билеты",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "deadline"
+     },
+     "text": "Срок — до вс, 25 окт. Задачу «Купить билеты» записал.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-17",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "В пятницу нужно отправить отчёт",
+     "kind": "created",
+     "template": "created_task",
+     "record": {
+      "type": "task",
+      "text": "Отправить отчёт",
+      "date": "2026-10-23",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Отправить отчёт» — пт, 23 окт.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-18",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши задачу разобрать почту",
+     "kind": "created",
+     "template": "created_task_nodate",
+     "record": {
+      "type": "task",
+      "text": "Разобрать почту",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Разобрать почту» сохранил, без срока.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-19",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "В четверг в 11 у меня встреча с дизайнером",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с дизайнером",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с дизайнером» на завтра в 11:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-20",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни вчера в 10 позвонить Анне",
+     "kind": "clarify",
+     "template": "clarify_date_past",
+     "text": "Вчера в 10:00 уже позади. На когда записать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-1",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Еленой в субботу в 20:45",
+     "kind": "conflict",
+     "template": "conflict_one",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Еленой",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Это время занято: «Встреча с Марией по интеграции». Как поступим?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-21",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни про отчёт в пятницу в 7",
+     "kind": "confirm",
+     "template": "confirm",
+     "record": {
+      "type": "reminder",
+      "text": "Отчёт",
+      "date": "2026-10-23",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Проверим: напоминание «Отчёт», пт, 23 окт в 19:00. Всё так?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т7-5",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Есть ли у меня встречи сегодня?",
+     "kind": "list",
+     "template": "list_type_yes",
+     "text": "Есть, 1 встреча:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-6",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Покажи мои встречи на сегодня",
+     "kind": "list",
+     "template": "list_some",
+     "text": "Вот ваши планы на сегодня: 1 встреча.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-7",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что запланировано на эту неделю?",
+     "kind": "list",
+     "template": "list_some",
+     "text": "На этой неделе запланировано 8 дел:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-8",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что у меня 6 ноября?",
+     "kind": "list",
+     "template": "list_empty_nearest",
+     "text": "На пт, 6 ноя планов нет. Ближайшее — сб, 7 ноя в 13:00: «Проверить статус задачи по сайту».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-3",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Я когда-то ставил задачу по договору, найди её",
+     "kind": "found",
+     "template": "found_some",
+     "text": "Нашёл 75 записей:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-4",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Когда у меня была встреча с Иваном?",
+     "kind": "found",
+     "template": "found_when_last",
+     "text": "В последний раз — чт, 5 мар в 15:45: «Встреча с Иваном по презентации».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т3-1",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Какая завтра погода?",
+     "kind": "off_topic",
+     "template": "off_topic",
+     "text": "Это не по моей части. Я веду задачи, встречи и напоминания.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т3-2",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что ты умеешь?",
+     "kind": "help",
+     "template": "help",
+     "text": "Stevens, к вашим услугам. Запишу, найду и расскажу о планах — говорите или пишите.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию",
+      "Поставь встречу с Иваном завтра",
+      "Что у меня с Иваном?",
+      "Запиши идею: открыть кофейню"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т3-3",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Спасибо, Стивенс",
+     "kind": "thanks",
+     "template": "thanks",
+     "text": "К вашим услугам.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т3-4",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Сделай что-нибудь с этим",
+     "kind": "not_understood",
+     "template": "not_understood",
+     "text": "Не уловил. Попробуйте так:",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-1",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Иваном завтра",
+     "kind": "clarify",
+     "template": "clarify_meeting_time",
+     "text": "Позвольте уточнить: в какое время?",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 15",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Иваном», завтра в 15:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т11-2",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Еленой в субботу в 20:45",
+     "kind": "conflict",
+     "template": "conflict_one",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Еленой",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Это время занято: «Встреча с Марией по интеграции». Как поступим?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    },
+    {
+     "press": "Оставить обе",
+     "kind": "created",
+     "template": "conflict_keep_both",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Еленой",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Оставил обе — в одно время.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т6-2",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни про отчёт",
+     "kind": "clarify",
+     "template": "clarify_reminder_when",
+     "text": "Позвольте уточнить: когда напомнить?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Что у меня сегодня?",
+     "kind": "list",
+     "template": "list_some",
+     "text": "На сегодня — 2 дела:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-9",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "покажи пятницу",
+     "kind": "list",
+     "text": "На пт, 23 окт планов нет. Ближайшее — сб, 24 окт в 10:45: «Проверить смету по мобильному приложению».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-10",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что в понедельник",
+     "kind": "list",
+     "text": "На пн, 26 окт — 2 дела:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-11",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что у меня на выходных",
+     "kind": "list",
+     "text": "На выходных — 4 дела:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-12",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что на этой неделе",
+     "kind": "list",
+     "text": "На этой неделе — 8 дел:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-13",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Сколько у меня дел завтра?",
+     "kind": "list",
+     "text": "Завтра запланировано 1 дело:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-14",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что я делал на прошлой неделе?",
+     "kind": "list",
+     "text": "На прошлой неделе — 3 дела:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т7-15",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что у меня завтра утром",
+     "kind": "list",
+     "text": "Вот ваши планы завтра утром: 1 дело.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т6-3",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни позвонить врачу",
+     "kind": "clarify",
+     "text": "Когда напомнить: день и время?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра",
+     "kind": "clarify",
+     "text": "Укажите время напоминания.",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 11",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить врачу",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на завтра в 11:00 сохранил: «Позвонить врачу».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-22",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Ваней завтра в 14",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-22",
+      "time": "14:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 14:00 — «Встреча с Ваней».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "а на завтра?",
+     "kind": "list",
+     "text": "Завтра — 3 дела:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т16-1",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "есть окно в пятницу?",
+     "kind": "clarify",
+     "text": "Пт, 23 окт свободно: 09:00–21:00. Нажмите время, чтобы поставить встречу.",
+     "awaiting_reply": false,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-2",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "я свободен в пятницу в 15?",
+     "kind": "clarify",
+     "text": "Пт, 23 окт в 15:00 свободно — можно ставить.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Поставить на 15:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-1",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Олегом завтра в 15",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Олегом",
+      "date": "2026-10-22",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Олегом» на завтра в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "отмени встречу с Олегом",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Олегом",
+      "date": "2026-10-22",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил «Встреча с Олегом». Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-2",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни через 20 минут выключить духовку",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Выключить духовку",
+      "date": "2026-10-21",
+      "time": "10:20",
+      "date_kind": "exact"
+     },
+     "text": "Записал: сегодня в 10:20 — «Выключить духовку».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "отмени",
+     "kind": "deleted",
+     "record": {
+      "type": "reminder",
+      "text": "Выключить духовку",
+      "date": "2026-10-21",
+      "time": "10:20",
+      "date_kind": "exact"
+     },
+     "text": "Хорошо, «Выключить духовку» убрал.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "ок",
+     "kind": "thanks",
+     "text": "Хорошо.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "отмени",
+     "kind": "cancelled",
+     "text": "Отменять пока нечего.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-23",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Иваном завтра в 13",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "13:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 13:00 — «Встреча с Иваном».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "а теперь на 12",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Встреча с Иваном» теперь завтра в 12:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "лучше в субботу",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-24",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "«Встреча с Иваном» — теперь сб, 24 окт в 12:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "нет, лучше на понедельник в 10",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Встреча с Иваном» теперь пн, 26 окт в 10:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "сделай задачей",
+     "kind": "updated",
+     "record": {
+      "type": "task",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Сделал: «Встреча с Иваном» — теперь задача.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т17-1",
+   "feature": "Ф17",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "найди встречу с Марией",
+     "kind": "found",
+     "text": "Вот что нашлось — 8 записей:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на завтра",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Нашёл несколько. Какую из них?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Марией по интеграции · сб, 24 окт",
+      "Встреча с Марией по сайту · пн, 8 мар 2027",
+      "Встреча с Марией по хакатону · ср, 9 июн 2027",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "на 15",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Уточните, о какой записи речь.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Марией по интеграции · сб, 24 окт",
+      "Встреча с Марией по сайту · пн, 8 мар 2027",
+      "Встреча с Марией по хакатону · ср, 9 июн 2027",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "вторую",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по сайту",
+      "date": "2026-10-22",
+      "time": "17:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Встреча с Марией по сайту» на завтра в 17:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-3",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Удали встречу с Марией по договору и по интеграции",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по сайту",
+      "date": "2026-10-22",
+      "time": "17:00",
+      "date_kind": "exact"
+     },
+     "text": "Уточните, о какой записи речь.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Марией по сайту · завтра",
+      "Встреча с Марией по интеграции · сб, 24 окт",
+      "Встреча с Марией по хакатону · ср, 9 июн 2027",
+      "Встреча с Марией по презентации · сегодня",
+      "Встреча с Марией по договору · сб, 12 сен",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-4",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "найди встречу с Марией",
+     "kind": "found",
+     "text": "Вот что нашлось — 8 записей:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали её",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по сайту",
+      "date": "2026-10-22",
+      "time": "17:00",
+      "date_kind": "exact"
+     },
+     "text": "Уточните, о какой записи речь.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Марией по сайту · завтра",
+      "Встреча с Марией по интеграции · сб, 24 окт",
+      "Встреча с Марией по хакатону · ср, 9 июн 2027",
+      "Встреча с Марией по презентации · сегодня",
+      "Встреча с Марией по договору · сб, 12 сен",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "ту что в субботу",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Удалил «Встреча с Марией по интеграции». Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "верни",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Вернул: «Встреча с Марией по интеграции», сб, 24 окт в 20:45.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-3",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "поставь встречу с Аней завтра в 16",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Аней",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Аней», завтра в 16:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "поставь встречу с Борей завтра в 16",
+     "kind": "conflict",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Борей",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Это время занято: «Встреча с Аней». Как поступим?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "conflict",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Борей",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "На 16:00 уже есть встреча: «Встреча с Аней». Что сделать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "давай в 19",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Борей",
+      "date": "2026-10-22",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 19:00 — «Встреча с Борей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-4",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "поставь встречу с Гошей завтра в 18",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Гошей",
+      "date": "2026-10-22",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Гошей» на завтра в 18:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "поставь встречу с Димой завтра в 18",
+     "kind": "conflict",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Димой",
+      "date": "2026-10-22",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Это время занято: «Встреча с Гошей». Как поступим?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "оставь обе",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Димой",
+      "date": "2026-10-22",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Сохранил обе встречи.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-4",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши на завтра встретиться с Алексеем",
+     "kind": "clarify",
+     "text": "Позвольте уточнить: в какое время?",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "12:00",
+      "13:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в субботу в 12 сходить в кино",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Сходить в кино",
+      "date": "2026-10-24",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Задача «Сходить в кино» стоит на сб, 24 окт в 12:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-24",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "на этой неделе позвонить бабушке",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить бабушке",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "deadline"
+     },
+     "text": "Записал: «Позвонить бабушке», срок — до вс, 25 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-25",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "в следующем месяце сдать отчёт",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Сдать отчёт",
+      "date": "2026-11-30",
+      "time": null,
+      "date_kind": "deadline"
+     },
+     "text": "Записал: «Сдать отчёт», срок — до пн, 30 ноя.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-26",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "и ещё в пятницу купить подарок Лене",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить подарок Лене",
+      "date": "2026-10-23",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Купить подарок Лене» — пт, 23 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-5",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни мне в понедельник позвонить в банк и во вторник забрать документы",
+     "kind": "clarify",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить в банк",
+      "date": "2026-10-26",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Во сколько напомнить «позвонить в банк» 26 октября?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 10",
+     "kind": "clarify",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить в банк",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Во сколько напомнить «забрать документы» 27 октября?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 11",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить в банк",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал 2 дела.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-5",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "когда у меня ближайшая встреча",
+     "kind": "found",
+     "text": "Ближайшая запись — завтра в 14:00: «Встреча с Ваней».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т8-6",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "какое у меня следующее дело",
+     "kind": "found",
+     "text": "Ближайшая запись — сегодня в 10:15: «Подготовиться к встрече с Пульсом».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-5",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Удали все дела на следующей неделе",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-26",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Точно удалить 11 дел на следующей неделе? Список ниже.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "неа",
+     "kind": "cancelled",
+     "text": "Отменил.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т3-5",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Отлично, спасибо.",
+     "kind": "thanks",
+     "text": "Пожалуйста.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-27",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши: купить корм коту",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить корм коту",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал задачу без срока: «Купить корм коту».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Купить корм коту сделал",
+     "kind": "completed",
+     "record": {
+      "type": "task",
+      "text": "Купить корм коту",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово: «Купить корм коту» — сделано.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-6",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Ольгой завтра в 20",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ольгой",
+      "date": "2026-10-22",
+      "time": "20:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Ольгой», завтра в 20:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "встречу с Ольгой — готово",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ольгой",
+      "date": "2026-10-22",
+      "time": "20:00",
+      "date_kind": "exact"
+     },
+     "text": "Отмечаются только задачи и напоминания. Встречу можно удалить.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Удалить",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ольгой",
+      "date": "2026-10-22",
+      "time": "20:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил: «Встреча с Ольгой», завтра в 20:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т15-1",
+   "feature": "Ф15",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Каждый вторник в 9 планёрка до июня",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-10-27",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: «Планёрка» — каждый вторник в 09:00 до 31 мая 2027 года. Ближайший раз — вт, 27 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "удали планёрку вообще",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-10-27",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, «Планёрка» больше не повторяется: убрал 31 день.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "верни",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-10-27",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, 31 запись снова в планах.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т16-3",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "свободен ли я завтра в 9:30",
+     "kind": "clarify",
+     "record": {
+      "type": "task",
+      "text": "Подготовить вопросы для Максимом",
+      "date": "2026-10-22",
+      "time": "09:15",
+      "date_kind": "exact"
+     },
+     "text": "Завтра в 09:30 уже «Подготовить вопросы для Максимом». Свободные окна: 09:45–21:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "09:45",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-28",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни завтра в полдень позвонить маме",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить маме",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 12:00: «Позвонить маме».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-29",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни в полночь выпить таблетку",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Выпить таблетку",
+      "date": "2026-10-22",
+      "time": "00:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 00:00: «Выпить таблетку».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-30",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни в пятницу в пол восьмого вечера ужин",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Ужин",
+      "date": "2026-10-23",
+      "time": "19:30",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на пт, 23 окт в 19:30 сохранил: «Ужин».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-31",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча в четверг без четверти девять утра с Олей",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Олей",
+      "date": "2026-10-22",
+      "time": "08:45",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 08:45 — «Встреча с Олей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-32",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни в субботу в половине девятого утра бег",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Бег",
+      "date": "2026-10-24",
+      "time": "08:30",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на сб, 24 окт в 08:30 сохранил: «Бег».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-5",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "поставь встречу с Петей завтра на 9 утра",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Петей» на завтра в 09:00. Между встречами остаётся 15 минут.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-6",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча в четверг",
+     "kind": "clarify",
+     "text": "С кем или о чём будет встреча?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "clarify",
+     "text": "Уточните, пожалуйста: с кем встреча?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра в 7 вечера кино с Петей",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Кино с Петей",
+      "date": "2026-10-22",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Задача «Кино с Петей» стоит на завтра в 19:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т15-2",
+   "feature": "Ф15",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "каждый день в 8 утра пить воду",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Пить воду",
+      "date": "2026-10-22",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: «Пить воду» — каждый день в 08:00. Ближайший раз — завтра.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи повторы",
+     "kind": "found",
+     "text": "Повторяющихся дел — 1:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали только завтрашнюю воду",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Пить воду",
+      "date": "2026-10-22",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил «Пить воду» только на завтра.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-7",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "купить хлеб",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Купить хлеб» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "хлеб купил",
+     "kind": "completed",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал, что «Купить хлеб» сделано.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-33",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "позвонить в банк",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Позвонить в банк» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "позвонила в банк",
+     "kind": "completed",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Отметил как выполненное: «Позвонить в банк».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т3-6",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "сделать что-нибудь",
+     "kind": "not_understood",
+     "text": "Боюсь, не понял. Можно, например, так:",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-34",
+   "feature": "Ф5",
+   "clock": "2026-12-31T22:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни 1 января в 12 поздравить бабушку",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Поздравить бабушку",
+      "date": "2027-01-01",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 12:00: «Поздравить бабушку».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-35",
+   "feature": "Ф5",
+   "clock": "2026-12-31T22:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни 05.01 в 10 к врачу",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "К врачу",
+      "date": "2027-01-05",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на вт, 5 янв 2027 в 10:00: «К врачу».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-36",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча с Ваней 25.12 в 15:00",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-12-25",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Ваней», пт, 25 дек в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-7",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни сегодня в 8 утра зарядка",
+     "kind": "clarify",
+     "text": "Боюсь, это время уже прошло. Выберите другое.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Завтра в 08:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра в 08:00",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Зарядка",
+      "date": "2026-10-22",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на завтра в 08:00 сохранил: «Зарядка».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т17-2",
+   "feature": "Ф17",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни завтра в 10 позвонить Ивану",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 10:00: «Позвонить Ивану».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "нет, в 11",
+     "kind": "updated",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Позвонить Ивану» теперь завтра в 11:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "а на час раньше",
+     "kind": "updated",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "«Позвонить Ивану» — теперь завтра в 10:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "не, на пятницу",
+     "kind": "updated",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-23",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Позвонить Ивану» на пт, 23 окт в 10:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали",
+     "kind": "deleted",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-23",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил: «Позвонить Ивану», пт, 23 окт в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-6",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "запиши встречу с Олегом в пятницу в 15",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Олегом",
+      "date": "2026-10-23",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Олегом», пт, 23 окт в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "поставь созвон с Аней в пятницу в 15",
+     "kind": "conflict",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Аней",
+      "date": "2026-10-23",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "На 15:00 уже есть встреча: «Встреча с Олегом». Что сделать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Другое время для новой",
+      "Оставить обе",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "другое время",
+     "kind": "clarify",
+     "text": "На какое время поставить новую встречу?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 16",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Аней",
+      "date": "2026-10-23",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Созвон с Аней» на пт, 23 окт в 16:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-8",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни в 7 позвонить сестре",
+     "kind": "clarify",
+     "text": "На какой день?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "вечера",
+     "kind": "clarify",
+     "text": "Какого числа?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить сестре",
+      "date": "2026-10-22",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 19:00: «Позвонить сестре».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т18-1",
+   "feature": "Ф18",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "привет",
+     "kind": "help",
+     "text": "Я Stevens, слежу за вашим временем. Скажите, например: «Напомни завтра в 10 позвонить Ивану».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию",
+      "Поставь встречу с Иваном завтра",
+      "Что у меня с Иваном?",
+      "Запиши идею: открыть кофейню"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т3-7",
+   "feature": "Ф3",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "ты кто",
+     "kind": "help",
+     "text": "Я Stevens, слежу за вашим временем. Скажите, например: «Напомни завтра в 10 позвонить Ивану».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию",
+      "Поставь встречу с Иваном завтра",
+      "Что у меня с Иваном?",
+      "Запиши идею: открыть кофейню"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т18-2",
+   "feature": "Ф18",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "пока",
+     "kind": "thanks",
+     "text": "К вашим услугам.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т16-4",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "какие дни свободны на следующей неделе",
+     "kind": "clarify",
+     "text": "Самый свободный день на следующей неделе — вт, 27 окт: 1 дело, самое большое окно 09:00–21:00. Выходные не считал.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вт, 27 окт",
+      "Ср, 28 окт",
+      "Пн, 26 окт"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-37",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что у меня 32 октября",
+     "kind": "clarify",
+     "text": "Такого дня нет: «32 октября». Назовите другой день.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-8",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "отметь всё на сегодня выполненным",
+     "kind": "completed",
+     "record": {
+      "type": "task",
+      "text": "Подготовиться к встрече с Пульсом",
+      "date": "2026-10-21",
+      "time": "10:15",
+      "date_kind": "exact"
+     },
+     "text": "Отметил выполненными 1 дело на сегодня.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т6-9",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни 25 числа оплатить кредит",
+     "kind": "clarify",
+     "text": "Во сколько напомнить?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 10",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Оплатить кредит",
+      "date": "2026-10-25",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: вс, 25 окт в 10:00 — «Оплатить кредит».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-38",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни через час двадцать позвонить",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить",
+      "date": "2026-10-21",
+      "time": "11:20",
+      "date_kind": "exact"
+     },
+     "text": "Записал: сегодня в 11:20 — «Позвонить».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-9",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Найди встречи с Ваней",
+     "kind": "found",
+     "text": "Вот что нашлось — 4 записи:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Когда у меня была встреча с Иваном?",
+     "kind": "found",
+     "text": "Последняя запись — чт, 5 мар в 15:45: «Встреча с Иваном по презентации».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "когда я последний раз звонил Ивану",
+     "kind": "found",
+     "text": "В последний раз — сб, 27 июн в 10:30: «Позвонить Иваном».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "найди созвон с Петром",
+     "kind": "found",
+     "text": "Совпадений нет. Попробуйте искать иначе.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши встречу с Ваней завтра в 15:00",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-22",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Ваней», завтра в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "перенеси её на пятницу",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-23",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "«Встреча с Ваней» — теперь пт, 23 окт в 15:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на 14",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-23",
+      "time": "14:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Встреча с Ваней» теперь пт, 23 окт в 14:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на 15:00",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-23",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "«Встреча с Ваней» — теперь пт, 23 окт в 15:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "сдвинь на час позже",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-23",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Встреча с Ваней» на пт, 23 окт в 16:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Напомни завтра в 10 позвонить маме",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить маме",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал напоминание на завтра в 10:00: «Позвонить маме».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "отметь её выполненной",
+     "kind": "completed",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить маме",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал, что «Позвонить маме» сделано.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали её",
+     "kind": "deleted",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить маме",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил: «Позвонить маме», завтра в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "Запиши купить хлеб",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Купить хлеб» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "перенеси это",
+     "kind": "clarify",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "На какой день перенести «Купить хлеб»?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Пт, 23 окт",
+      "Ср, 28 окт",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "на завтра",
+     "kind": "updated",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": "2026-10-22",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Купить хлеб» теперь завтра.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня с Ваней?",
+     "kind": "person",
+     "text": "С Ваней — 37 записей, впереди 9 дел. Ближайшее — пт, 23 окт в 16:00: «Встреча с Ваней».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на субботу",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-24",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Встреча с Ваней» на сб, 24 окт в 16:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-10-24",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "На какой день поставить «Встреча с Ваней»?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Пт, 23 окт",
+      "Сб, 31 окт",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "на вторник через неделю",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-11-03",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "«Встреча с Ваней» — теперь вт, 3 ноя в 16:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на 12:00",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-11-03",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Встреча с Ваней» теперь вт, 3 ноя в 12:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня с Машей на этой неделе",
+     "kind": "person",
+     "text": "На этой неделе с Машей запланировано 2 дела:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "досье на Аркадия",
+     "kind": "person",
+     "text": "С Аркадием записей нет.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Найти время для встречи"
+     ]
+    },
+    {
+     "say": "Найди встречу с Марией по сайту",
+     "kind": "found",
+     "text": "Есть одна: «Встреча с Марией по сайту», пн, 8 мар 2027 в 17:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "перенеси её на завтра в 18",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по сайту",
+      "date": "2026-10-22",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Встреча с Марией по сайту» на завтра в 18:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши встречу с и вам завтра в 12",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с и вам",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с и вам» на завтра в 12:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "исправь и вам на Иваном",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, теперь «Встреча с Иваном».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Напомни купить хлеб",
+     "kind": "clarify",
+     "text": "Назовите день и время напоминания.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Стивс, не хлеб, а молоко",
+     "kind": "clarify",
+     "text": "Исправил: «Купить молоко». Когда напомнить: день и время?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра в 9",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Купить молоко",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на завтра в 09:00 сохранил: «Купить молоко».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "не молоко, а кефир",
+     "kind": "updated",
+     "record": {
+      "type": "reminder",
+      "text": "Купить кефир",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, теперь «Купить кефир».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "исправь вертолёт на самолёт",
+     "kind": "not_understood",
+     "text": "Не уловил. Попробуйте так:",
+     "awaiting_reply": false,
+     "buttons": [
+      "Напомни завтра в 10 утра позвонить Ивану",
+      "Что у меня на следующей неделе?",
+      "Найди задачу про презентацию"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-10",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни мне завтра встретиться с Машей и через неделю встретиться с Иваном",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Во сколько встреча с Машей завтра?",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "10",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Во сколько встреча с Иваном 28 октября?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "есть 10 место есть поставь 10 стой убери всё и поставь 10",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: 2 дела в календаре.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-11",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Петей завтра",
+     "kind": "clarify",
+     "text": "Укажите, пожалуйста, время встречи.",
+     "awaiting_reply": true,
+     "buttons": [
+      "11:00",
+      "12:00",
+      "13:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "ну",
+     "kind": "clarify",
+     "text": "Во сколько встреча?",
+     "awaiting_reply": true,
+     "buttons": [
+      "11:00",
+      "12:00",
+      "13:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "есть 11 место есть поставь 11 стой убери всё и поставь 11",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 11:00 — «Встреча с Петей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-10",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши на завтра встретиться с Алексеем",
+     "kind": "clarify",
+     "text": "Укажите, пожалуйста, время встречи.",
+     "awaiting_reply": true,
+     "buttons": [
+      "12:00",
+      "13:00",
+      "14:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "не слушай 13:00",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Алексеем",
+      "date": "2026-10-22",
+      "time": "13:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 13:00 — «Встреча с Алексеем».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-11",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Олегом завтра",
+     "kind": "clarify",
+     "text": "Позвольте уточнить: в какое время?",
+     "awaiting_reply": true,
+     "buttons": [
+      "12:00",
+      "14:00",
+      "15:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "стой",
+     "kind": "cancelled",
+     "text": "Отменено.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-12",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни мне завтра встретиться с Машей и через неделю встретиться с Иваном",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Во сколько встреча с Машей завтра?",
+     "awaiting_reply": true,
+     "buttons": [
+      "12:00",
+      "14:00",
+      "15:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "убери всё",
+     "kind": "cancelled",
+     "text": "Отменил.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-13",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши встречу с Иваном 5 января 2031 в 15",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Иваном» на вс, 5 янв 2031 в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Удали встречу с Иваном 5 января 2031",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил: «Встреча с Иваном», вс, 5 янв 2031 в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "press": "Вернуть",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Вернул: «Встреча с Иваном», вс, 5 янв 2031 в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Напомни 5 января 2031 в 12 про презентацию",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Презентацию",
+      "date": "2031-01-05",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: вс, 5 янв 2031 в 12:00 — «Презентацию».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "убери напоминание про презентацию",
+     "kind": "deleted",
+     "record": {
+      "type": "reminder",
+      "text": "Презентацию",
+      "date": "2031-01-05",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, убрал из планов: «Презентацию».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "Запиши купить хлеб 5 января 2031",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": "2031-01-05",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Задача «Купить хлеб» стоит на вс, 5 янв 2031.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "удали все дела на 5 января 2031",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Точно удалить 2 дела на вс, 5 янв 2031? Список ниже.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет",
+     "kind": "cancelled",
+     "text": "Отменено.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня 5 января 2031",
+     "kind": "list",
+     "text": "Вот ваши планы на вс, 5 янв 2031: 2 дела.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Стивс, очисти 5 января 2031",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалить 2 дела на вс, 5 янв 2031? Вот они:",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "да, удаляй",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил 2 дела. Если зря — верну все разом.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "press": "Вернуть все",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, 2 записи снова в планах.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали все встречи на 5 января 2031",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2031-01-05",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Удалил «Встреча с Иваном». Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "удали все встречи на 5 января 2031",
+     "kind": "found",
+     "text": "Удалять нечего: на вс, 5 янв 2031 подходящих записей нет.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "убери все дела за все дни",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Подготовить техническое задание",
+      "date": "2024-01-07",
+      "time": "14:45",
+      "date_kind": "exact"
+     },
+     "text": "Точно удалить 1001 дело за все дни? Список ниже.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "press": "Да, удалить все",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Подготовить техническое задание",
+      "date": "2024-01-07",
+      "time": "14:45",
+      "date_kind": "exact"
+     },
+     "text": "Готово, убрал 1001 дело. Можно вернуть кнопкой.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "press": "Вернуть все",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Подготовить техническое задание",
+      "date": "2024-01-07",
+      "time": "14:45",
+      "date_kind": "exact"
+     },
+     "text": "Вернул 1001 запись.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши встречу с Иваном послезавтра в 11",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-23",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: пт, 23 окт в 11:00 — «Встреча с Иваном».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "переименуй её в созвон с Иваном",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Иваном",
+      "date": "2026-10-23",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, теперь называется «Созвон с Иваном».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "поменяй Ивана на Петра",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Петром",
+      "date": "2026-10-23",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, теперь «Созвон с Петром».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "сделай её задачей",
+     "kind": "updated",
+     "record": {
+      "type": "task",
+      "text": "Созвон с Петром",
+      "date": "2026-10-23",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, теперь это задача: «Созвон с Петром».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши подготовить отчёт",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Подготовить отчёт",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово: «Подготовить отчёт», без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "сделай задачу про отчёт напоминанием",
+     "kind": "clarify",
+     "record": {
+      "type": "reminder",
+      "text": "Подготовить отчёт",
+      "date": null,
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Сделал: «Подготовить отчёт» — теперь напоминание. На какой день поставить «Подготовить отчёт»?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Завтра",
+      "Пт, 23 окт",
+      "Ср, 28 окт",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "завтра в 9",
+     "kind": "updated",
+     "record": {
+      "type": "reminder",
+      "text": "Подготовить отчёт",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "«Подготовить отчёт» — теперь завтра в 09:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши встречу с Машей 30 декабря в 15",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Машей» на ср, 30 дек в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Запиши задачу купить молоко",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал задачу без срока: «Купить молоко».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "переименуй встречу с Машей в демо проекта",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Демо проекта",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Переименовал: «Демо проекта».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "поменяй её на завтра в 18",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Демо проекта",
+      "date": "2026-10-22",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Демо проекта» теперь завтра в 18:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Найди задачу купить молоко",
+     "kind": "found",
+     "text": "Нашлась одна запись: «Купить молоко».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "переименуй её в купить кефир",
+     "kind": "updated",
+     "record": {
+      "type": "task",
+      "text": "Купить кефир",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово, теперь называется «Купить кефир».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Найди встречи с Ваней",
+     "kind": "found",
+     "text": "Вот что нашлось — 4 записи:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали её",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном по бюджету",
+      "date": "2027-03-20",
+      "time": "08:45",
+      "date_kind": "exact"
+     },
+     "text": "Нашёл несколько. Какую из них?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Иваном по бюджету · сб, 20 мар 2027",
+      "Встреча с Иваном по презентации · чт, 5 мар",
+      "Встреча с Иваном по презентации · сб, 27 сен 2025",
+      "Встреча с Иваном по CRM · пт, 4 апр 2025",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Найди встречи с Ваней",
+     "kind": "found",
+     "text": "Нашлось 4 совпадения:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "переименуй её в созвон",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном по бюджету",
+      "date": "2027-03-20",
+      "time": "08:45",
+      "date_kind": "exact"
+     },
+     "text": "Какую именно?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Встреча с Иваном по бюджету · сб, 20 мар 2027",
+      "Встреча с Иваном по презентации · чт, 5 мар",
+      "Встреча с Иваном по презентации · сб, 27 сен 2025",
+      "Встреча с Иваном по CRM · пт, 4 апр 2025",
+      "Отменить"
+     ]
+    },
+    {
+     "press": "Встреча с Иваном по бюджету · сб, 20 мар 2027",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон",
+      "date": "2027-03-20",
+      "time": "08:45",
+      "date_kind": "exact"
+     },
+     "text": "Переименовал: «Созвон».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Найди задачу купить кефир",
+     "kind": "found",
+     "text": "Есть одна: «Купить кефир», без срока.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали её",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Купить кефир",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово, убрал из планов: «Купить кефир».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т15-3",
+   "feature": "Ф15",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "каждый вторник у меня планёрка в 10",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-10-27",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Буду держать в планах: «Планёрка», каждый вторник в 10:00. Начинаем вт, 27 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "по средам и пятницам у меня йога в 19 до конца года",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Йога",
+      "date": "2026-10-21",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: «Йога» — по средам и пятницам в 19:00 до 31 декабря. Ближайший раз — сегодня.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "напомни каждый понедельник в 9 выносить мусор до июня",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Выносить мусор",
+      "date": "2026-10-26",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Буду держать в планах: «Выносить мусор», каждый понедельник в 09:00 до 31 мая 2027 года. Начинаем пн, 26 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "каждую среду в 9 зарядка",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Зарядка",
+      "date": "2026-10-28",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: «Зарядка» — каждую среду в 09:00. Ближайший раз — ср, 28 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "каждый четверг созвон с командой",
+     "kind": "clarify",
+     "text": "Во сколько встреча?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 11",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с командой",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Буду держать в планах: «Созвон с командой», каждый четверг в 11:00. Начинаем завтра.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "что у меня на следующей неделе",
+     "kind": "list",
+     "text": "На следующей неделе запланировано 6 дел:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "найди планёрку",
+     "kind": "found",
+     "text": "Есть одна: «Планёрка», вт, 27 окт в 10:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали планёрку в следующий вторник",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-10-27",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: вт, 27 окт «Планёрка» не будет, остальные дни остались.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "что у меня 3 ноября",
+     "kind": "list",
+     "text": "На вт, 3 ноя — 1 дело:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали йогу",
+     "kind": "clarify",
+     "record": {
+      "type": "task",
+      "text": "Йога",
+      "date": "2026-10-21",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "«Йога» повторяется по средам и пятницам. Убрать только сегодня или все предстоящие дни?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Только сегодня",
+      "Все предстоящие",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "только ближайшую",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Йога",
+      "date": "2026-10-21",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Убрал «Йога» на сегодня. Остальные дни на месте.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "что у меня в пятницу",
+     "kind": "list",
+     "text": "На пт, 23 окт запланировано 1 дело:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "убери планёрку вообще",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Планёрка",
+      "date": "2026-11-03",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Убрал «Планёрка» со всех предстоящих дней — 51 раз. Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "что у меня 3 ноября",
+     "kind": "list",
+     "text": "На вт, 3 ноя свободно. Ближайшее дело — ср, 4 ноя в 09:00: «Зарядка».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "верни все",
+     "kind": "cancelled",
+     "text": "Отменять пока нечего.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали йогу",
+     "kind": "clarify",
+     "record": {
+      "type": "task",
+      "text": "Йога",
+      "date": "2026-10-23",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Это повтор: по средам и пятницам. Убрать только ближайший раз, пт, 23 окт, или все предстоящие?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Только пт, 23 окт",
+      "Все предстоящие",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "все",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Йога",
+      "date": "2026-10-23",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово, «Йога» больше не повторяется: убрал 20 дней.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "что у меня в пятницу",
+     "kind": "list",
+     "text": "На пт, 23 окт ничего не запланировано. Следующее — «Выносить мусор», пн, 26 окт в 09:00.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали все созвоны с командой",
+     "kind": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с командой",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Убрал «Созвон с командой» со всех предстоящих дней — 53 раза. Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "Запиши купить подарок маме",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить подарок маме",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Купить подарок маме» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Запиши разобрать балкон",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Разобрать балкон",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово: «Разобрать балкон», без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "заметка: идея для стартапа",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Идея для стартапа",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал в заметки: «Идея для стартапа».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "что у меня завтра",
+     "kind": "list",
+     "text": "Завтра свободно. Ближайшее дело — пн, 26 окт в 09:00: «Выносить мусор». Ещё без срока у вас 2 задачи. Показать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Показать",
+      "Не сейчас"
+     ]
+    },
+    {
+     "say": "нет",
+     "kind": "cancelled",
+     "text": "Хорошо.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня на этой неделе",
+     "kind": "list",
+     "text": "На этой неделе ничего не запланировано. Следующее — «Выносить мусор», пн, 26 окт в 09:00. Кроме того, у вас 2 задачи без срока. Показать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Показать",
+      "Не сейчас"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "found",
+     "text": "Вот задачи без срока, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня в декабре",
+     "kind": "list",
+     "text": "Вот ваши планы в декабре: 9 дел.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "какие у меня встречи завтра",
+     "kind": "list",
+     "text": "Завтра встреч нет.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "покажи задачи без срока",
+     "kind": "found",
+     "text": "Без срока у вас 2 задачи, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "завтра в 9:00 с Петей потом отправить договор Маше",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Здесь 2 дела. Записать все?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, записать все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "ммм ну это",
+     "kind": "clarify",
+     "text": "Простите, не расслышал. Так да или нет?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да",
+      "Нет"
+     ]
+    },
+    {
+     "say": "да записать всё",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: 2 дела в календаре.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "завтра в 11 созвон с Олегом потом купить корм",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Олегом",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Записать 2 дела?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, записать все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет",
+     "kind": "cancelled",
+     "text": "Хорошо, ничего не сохраняю.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "покажи все заметки",
+     "kind": "found",
+     "text": "У вас 1 заметка, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "найди заметку про стартап",
+     "kind": "found",
+     "text": "Нашёл одну запись:",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т24-1",
+   "feature": "Ф24",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "покажи заметки",
+     "kind": "found",
+     "text": "Заметок пока нет. Скажите, например: «Запиши идею: открыть кофейню».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши идею: открыть кофейню у дома",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Открыть кофейню у дома",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово, заметка: «Открыть кофейню у дома».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Стивс, заметка: купить подарок маме",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Купить подарок маме",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Сохранил заметку: «Купить подарок маме».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "сохрани в заметки пароль от вайфая на даче 1234",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Пароль от вайфая на даче 1234",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал в заметки: «Пароль от вайфая на даче 1234».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "запиши мысль что нужно больше спать",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Нужно больше спать",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово, заметка: «Нужно больше спать».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Запиши идею",
+     "kind": "clarify",
+     "text": "Что записать в заметку?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "подкаст про стартапы",
+     "kind": "created",
+     "record": {
+      "type": "note",
+      "text": "Подкаст про стартапы",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал в заметки: «Подкаст про стартапы».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Мои заметки",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи мои заметки",
+     "kind": "found",
+     "text": "Вот ваши заметки — 5 штук, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "какие у меня идеи",
+     "kind": "found",
+     "text": "У вас 5 заметок, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "заметки про кофейню",
+     "kind": "found",
+     "text": "Вот ваши заметки — 1 штука, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "найди заметку про подарок",
+     "kind": "found",
+     "text": "Нашлась одна запись: «Купить подарок маме».",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня сегодня",
+     "kind": "list",
+     "text": "Вот ваши планы на сегодня: 2 дела.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "что у меня на этой неделе",
+     "kind": "list",
+     "text": "На этой неделе — 8 дел:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "Запиши купить хлеб",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Купить хлеб» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "удали заметку про вайфай",
+     "kind": "deleted",
+     "record": {
+      "type": "note",
+      "text": "Пароль от вайфая на даче 1234",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Удалил: «Пароль от вайфая на даче 1234», без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "say": "покажи заметки",
+     "kind": "found",
+     "text": "У вас 4 заметки, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали все заметки",
+     "kind": "confirm",
+     "record": {
+      "type": "note",
+      "text": "Открыть кофейню у дома",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Удалить 4 заметки? Вот они:",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "deleted",
+     "record": {
+      "type": "note",
+      "text": "Открыть кофейню у дома",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово, убрал 4 заметки. Можно вернуть кнопкой.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "покажи заметки",
+     "kind": "found",
+     "text": "Заметок нет. Чтобы добавить, скажите «заметка:» и текст.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т6-12",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "зватра в 10 встреча с Иваном",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "«зватра» — полагаю, «завтра». Проверим: встреча «Встреча с Иваном», завтра в 10:00. Всё так?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "да",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Иваном» на завтра в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-13",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча с Иваном в пятницу или в субботу в 12",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-23",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Вы назвали два варианта, я взял первый. Верно понял: встреча «Встреча с Иваном», пт, 23 окт в 12:00?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет, в субботу",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-24",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Иваном», сб, 24 окт в 12:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-14",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "позвонить в банк завтра в 10 а нет в 11",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Беру то, что вы назвали последним. Верно понял: задача «Позвонить в банк», завтра в 11:00?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "верно",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": "2026-10-22",
+      "time": "11:00",
+      "date_kind": "exact"
+     },
+     "text": "Задача «Позвонить в банк» стоит на завтра в 11:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-15",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча в обед с Машей завтра",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": "13:00",
+      "date_kind": "exact"
+     },
+     "text": "«в обед» понял как 13:00. Проверим: встреча «Встреча с Машей», завтра в 13:00. Всё так?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет, в 14",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-10-22",
+      "time": "14:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Машей», завтра в 14:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-39",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни завтра вечерком полить цветы",
+     "kind": "confirm",
+     "record": {
+      "type": "reminder",
+      "text": "Полить цветы",
+      "date": "2026-10-22",
+      "time": "19:00",
+      "date_kind": "exact"
+     },
+     "text": "«вечерком» понял как 19:00. Проверим: напоминание «Полить цветы», завтра в 19:00. Всё так?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-16",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни попозже позвонить маме",
+     "kind": "clarify",
+     "text": "Позвольте уточнить: когда напомнить?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "сегодня в 18",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить маме",
+      "date": "2026-10-21",
+      "time": "18:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: сегодня в 18:00 — «Позвонить маме».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-40",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "надо купить молоко на днях",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "«на днях» — это без точного срока. Задача «Купить молоко», без срока — верно?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-17",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "наверное завтра в 10 позвонить в банк",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Мне послышалось сомнение. Верно понял: задача «Позвонить в банк», завтра в 10:00?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет",
+     "kind": "clarify",
+     "text": "Хорошо. Что поправить?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 12",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить в банк",
+      "date": "2026-10-22",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Позвонить в банк» — завтра в 12:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-18",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "завтра в 10 сделать что-то с отчётом",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Сделать что-то с отчётом",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Разобрал не всё. Задача «Сделать что-то с отчётом», завтра в 10:00 — верно?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет, дописать отчёт",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Дописать отчёт",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Задача «Дописать отчёт» стоит на завтра в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т6-19",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча с Иваном может в пятницу в 12",
+     "kind": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-23",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Мне послышалось сомнение. Встреча «Встреча с Иваном», пт, 23 окт в 12:00 — верно?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    },
+    {
+     "say": "неа",
+     "kind": "clarify",
+     "text": "Хорошо. Что поправить?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-41",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "позвонить маме завтра в 10",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить маме",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Позвонить маме» — завтра в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-42",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "купить чай или кофе",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить чай или кофе",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Записал задачу без срока: «Купить чай или кофе».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-43",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "купить 2 литра молока завтра",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить 2 литра молока",
+      "date": "2026-10-22",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Записал задачу на завтра: «Купить 2 литра молока».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-44",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни завтра в 9 про завтрак",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Завтрак",
+      "date": "2026-10-22",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на завтра в 09:00 сохранил: «Завтрак».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т7-16",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "что у меня зватра",
+     "kind": "list",
+     "text": "Завтра — 8 дел. Ещё без срока у вас 1 задача. Показать?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Показать",
+      "Не сейчас"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-14",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Отметь задачу передать отчёт на согласование выполненной",
+     "kind": "completed",
+     "template": "completed",
+     "record": {
+      "type": "task",
+      "text": "Передать отчёт на согласование",
+      "date": "2026-10-29",
+      "time": "15:30",
+      "date_kind": "exact"
+     },
+     "text": "Отметил как выполненное: «Передать отчёт на согласование».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-15",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Отметь встречу с Марией по интеграции выполненной",
+     "kind": "clarify",
+     "template": "completed_meeting_no",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Отмечаются только задачи и напоминания. Встречу можно удалить.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Удалить",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-16",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Удали встречу с Марией в субботу",
+     "kind": "deleted",
+     "template": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Удалил: «Встреча с Марией по интеграции», сб, 24 окт в 20:45.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-17",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Удали встречу с Марией в субботу",
+     "kind": "deleted",
+     "template": "deleted",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Удалил «Встреча с Марией по интеграции». Если зря — верну.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    },
+    {
+     "press": "Вернуть",
+     "kind": "created",
+     "template": "restored",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по интеграции",
+      "date": "2026-10-24",
+      "time": "20:45",
+      "date_kind": "exact"
+     },
+     "text": "Вернул: «Встреча с Марией по интеграции», сб, 24 окт в 20:45.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-18",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Удали задачу про договор",
+     "kind": "clarify",
+     "template": "which_one",
+     "record": {
+      "type": "task",
+      "text": "Провести планёрку по договору",
+      "date": "2026-11-21",
+      "time": "19:45",
+      "date_kind": "exact"
+     },
+     "text": "Нашёл несколько. Какую из них?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Провести планёрку по договору · сб, 21 ноя",
+      "Напомнить Алексеем про договору · ср, 27 янв 2027",
+      "Обсудить договору с Дмитрием · ср, 3 фев 2027",
+      "Проверить отчёт по договору · ср, 10 фев 2027",
+      "Проверить статус задачи по договору · вс, 21 фев 2027",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-45",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни завтра в 10 позвонить Ивану",
+     "kind": "created",
+     "template": "created_reminder",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал: завтра в 10:00 — «Позвонить Ивану».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "press": "Отменить",
+     "kind": "deleted",
+     "template": "undo_done",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Отменил: «Позвонить Ивану» не сохранил.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т5-46",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Слушай а ты можешь сделать напоминание о том что 30 декабря созвон с Иваном в 15",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Иваном",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Созвон с Иваном» на ср, 30 дек в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-47",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни про встречу с Машей 30 декабря в 15",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Машей",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: ср, 30 дек в 15:00 — «Встреча с Машей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-48",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 2:00",
+     "kind": "confirm",
+     "template": "confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "14:00",
+      "date_kind": "exact"
+     },
+     "text": "Проверим: встреча «Встреча с Петей», ср, 30 дек в 14:00. Всё так?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, верно",
+      "Нет"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т11-7",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 15",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Петей», ср, 30 дек в 15:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Созвон с Ваней 30 декабря в 15:15",
+     "kind": "created",
+     "template": "dense_schedule",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Ваней",
+      "date": "2026-12-30",
+      "time": "15:15",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Созвон с Ваней» на ср, 30 дек в 15:15. Между встречами остаётся 15 минут.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-49",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 15",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "15:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: ср, 30 дек в 15:00 — «Встреча с Петей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Задача отправить договор 30 декабря в 15:15",
+     "kind": "created",
+     "template": "created_task",
+     "record": {
+      "type": "task",
+      "text": "Отправить договор",
+      "date": "2026-12-30",
+      "time": "15:15",
+      "date_kind": "exact"
+     },
+     "text": "Записал задачу на ср, 30 дек в 15:15: «Отправить договор».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т14-1",
+   "feature": "Ф14",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Завтра в 10 созвон с Иваном, потом отправить договор Маше, а в пятницу сдать лабу",
+     "kind": "confirm",
+     "template": "multi_confirm",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Иваном",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Здесь 3 дела. Записать все?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, записать все",
+      "Нет"
+     ]
+    },
+    {
+     "press": "Да, записать все",
+     "kind": "created",
+     "template": "multi_created",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Иваном",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Записал 3 дела.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т14-2",
+   "feature": "Ф14",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни завтра в 10 позвонить Ивану и в 12 написать Маше",
+     "kind": "confirm",
+     "template": "multi_confirm",
+     "record": {
+      "type": "reminder",
+      "text": "Позвонить Ивану",
+      "date": "2026-10-22",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Здесь 2 дела. Записать все?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, записать все",
+      "Нет"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т14-3",
+   "feature": "Ф14",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Созвон с Иваном завтра, потом купить молоко",
+     "kind": "clarify",
+     "template": "clarify_many_time",
+     "record": {
+      "type": "meeting",
+      "text": "Созвон с Иваном",
+      "date": "2026-10-22",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Во сколько созвон с Иваном завтра?",
+     "awaiting_reply": true,
+     "buttons": [
+      "10:00",
+      "11:00",
+      "12:00",
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-5",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 10",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Петей», ср, 30 дек в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Когда я свободен 30 декабря на час?",
+     "kind": "clarify",
+     "template": "free_slots_plain",
+     "text": "Ср, 30 дек свободные окна: 09:00–10:00, 11:00–16:45 и 17:15–21:00. Выберите время для встречи.",
+     "awaiting_reply": false,
+     "buttons": [
+      "09:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "17:15",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-6",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Найди время встретиться с Ваней 30 декабря",
+     "kind": "clarify",
+     "template": "free_slots",
+     "text": "Для «Встреча с Ваней» ср, 30 дек свободно: 09:00–16:45 и 17:15–21:00. Выберите время.",
+     "awaiting_reply": false,
+     "buttons": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "17:15",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    },
+    {
+     "press": "09:00",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ваней",
+      "date": "2026-12-30",
+      "time": "09:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Ваней», ср, 30 дек в 09:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-7",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Какой день у меня самый свободный на этой неделе",
+     "kind": "clarify",
+     "template": "free_day",
+     "text": "Самый свободный день на этой неделе — пт, 23 окт: ни одного дела. Выходные не считал.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Пт, 23 окт",
+      "Завтра",
+      "Сегодня"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-8",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Самая свободная неделя в ноябре",
+     "kind": "clarify",
+     "template": "free_week",
+     "text": "Самая свободная неделя в ноябре — с 2 по 8 ноя: 7 дел. Свободнее всего пт, 6 ноя.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Пт, 6 ноя",
+      "Пн, 2 ноя",
+      "Вт, 3 ноя"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-9",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 10",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Петей», ср, 30 дек в 10:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Самые свободные часы 30 декабря",
+     "kind": "clarify",
+     "template": "free_longest_more",
+     "text": "Самое большое окно ср, 30 дек — 11:00–16:45, 5 часов 45 минут. Поменьше: 09:00–10:00 и 17:15–21:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-10",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей 30 декабря в 10",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-12-30",
+      "time": "10:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: ср, 30 дек в 10:00 — «Встреча с Петей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Найди свободное окно 30 декабря",
+     "kind": "clarify",
+     "template": "free_slots_plain",
+     "text": "Ср, 30 дек свободные окна: 09:00–10:00, 11:00–16:45 и 17:15–21:00. Выберите время для встречи.",
+     "awaiting_reply": false,
+     "buttons": [
+      "09:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "17:15",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т16-11",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Какой день самый свободный в сентябре",
+     "kind": "found",
+     "template": "free_period_past",
+     "text": "В сентябре дни уже прошли. Спросите про эту или следующую неделю.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т16-12",
+   "feature": "Ф16",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Найди большое свободное окно сегодня",
+     "kind": "clarify",
+     "template": "free_longest",
+     "text": "Самое большое окно сегодня — 10:45–21:00, 10 часов 15 минут.",
+     "awaiting_reply": false,
+     "buttons": [
+      "10:45",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00",
+      "19:00",
+      "20:00"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т18-3",
+   "feature": "Ф18",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "press": "[действие briefing]",
+     "kind": "list",
+     "template": "briefing_next",
+     "text": "Доброе утро. Сегодня 2 дела. Первым в 10:15 — «Подготовиться к встрече с Пульсом».",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т17-3",
+   "feature": "Ф17",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Иваном сегодня в 12:40",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-21",
+      "time": "12:40",
+      "date_kind": "exact"
+     },
+     "text": "Встреча записана: «Встреча с Иваном», сегодня в 12:40.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Встреча с Петей завтра в 12:40",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Петей",
+      "date": "2026-10-22",
+      "time": "12:40",
+      "date_kind": "exact"
+     },
+     "text": "Готово: завтра в 12:40 — «Встреча с Петей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Перенеси все встречи на завтра",
+     "kind": "clarify",
+     "template": "move_all_plan_some",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по презентации",
+      "date": "2026-10-21",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Завтра в те же часы свободно для 1 из 2. Как перенести?",
+     "awaiting_reply": true,
+     "buttons": [
+      "В те же часы",
+      "Выбрать время каждой",
+      "Отменить"
+     ]
+    },
+    {
+     "press": "В те же часы",
+     "kind": "clarify",
+     "template": "move_ask_time",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по презентации",
+      "date": "2026-10-22",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: 1 встреча теперь завтра. Завтра свободно: 09:45–12:40 и 13:40–21:00. Во сколько поставить «Встреча с Иваном»?",
+     "awaiting_reply": true,
+     "buttons": [
+      "09:45",
+      "10:00",
+      "11:00",
+      "13:40",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в 16",
+     "kind": "updated",
+     "template": "moved",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенёс «Встреча с Иваном» на завтра в 16:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т17-4",
+   "feature": "Ф17",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Иваном сегодня в 12:40",
+     "kind": "created",
+     "template": "created_meeting",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Иваном",
+      "date": "2026-10-21",
+      "time": "12:40",
+      "date_kind": "exact"
+     },
+     "text": "Готово: сегодня в 12:40 — «Встреча с Иваном».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "Перенеси все встречи",
+     "kind": "clarify",
+     "template": "move_all_ask_day",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по презентации",
+      "date": "2026-10-21",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "На какой день перенести 2 встречи?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Завтра",
+      "Пт, 23 окт",
+      "Сб, 24 окт",
+      "Ср, 28 окт",
+      "Отменить"
+     ]
+    },
+    {
+     "press": "Завтра",
+     "kind": "clarify",
+     "template": "move_all_plan_free",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по презентации",
+      "date": "2026-10-21",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Перенести 2 встречи на завтра в те же часы? Время свободно.",
+     "awaiting_reply": true,
+     "buttons": [
+      "В те же часы",
+      "Выбрать время каждой",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "в те же часы",
+     "kind": "updated",
+     "template": "moved_all",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Марией по презентации",
+      "date": "2026-10-22",
+      "time": "08:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: 2 встречи теперь завтра.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-19",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "задача на 25 октября встретиться с Лёшей в 12",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Лёшей",
+      "date": "2026-10-25",
+      "time": "12:00",
+      "date_kind": "exact"
+     },
+     "text": "Готово: вс, 25 окт в 12:00 — «Встреча с Лёшей».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "напомни сегодня в 13 не слушай",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Не слушай",
+      "date": "2026-10-21",
+      "time": "13:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на сегодня в 13:00 сохранил: «Не слушай».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "что у меня послезавтра",
+     "kind": "list",
+     "text": "На пт, 23 окт ничего не запланировано. Следующее — «Проверить смету по мобильному приложению», сб, 24 окт в 10:45.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали эту задачу",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Проверить смету по мобильному приложению",
+      "date": "2026-10-24",
+      "time": "10:45",
+      "date_kind": "exact"
+     },
+     "text": "Готово, убрал из планов: «Проверить смету по мобильному приложению».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-20",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "задача на 25 октября позвонить маме",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить маме",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Готово: «Позвонить маме» — вс, 25 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "задача на 25 октября купить молоко",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Задача «Купить молоко» стоит на вс, 25 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи что у меня 25 октября",
+     "kind": "list",
+     "text": "Вот ваши планы на вс, 25 окт: 3 дела.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали эти три задачи",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Обновить материалы по презентации",
+      "date": "2026-10-25",
+      "time": "13:15",
+      "date_kind": "exact"
+     },
+     "text": "Удалил 3 задачи. Если зря — верну все разом.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    },
+    {
+     "say": "покажи что у меня 25 октября",
+     "kind": "list",
+     "text": "На вс, 25 окт ничего не запланировано. Следующее — «Проверить коммерческое предложение по новому продукту», пн, 26 окт в 16:45.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "верни все",
+     "kind": "cancelled",
+     "text": "Пока нечего отменять.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-21",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "задача на 25 октября позвонить маме",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить маме",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Задача «Позвонить маме» стоит на вс, 25 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи что у меня 25 октября",
+     "kind": "list",
+     "text": "Вот ваши планы на вс, 25 окт: 2 дела.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали эти две задачи",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Обновить материалы по презентации",
+      "date": "2026-10-25",
+      "time": "13:15",
+      "date_kind": "exact"
+     },
+     "text": "Готово, убрал 2 задачи. Можно вернуть кнопкой.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть все"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-22",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "задача на 25 октября позвонить маме",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Позвонить маме",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Записал задачу на вс, 25 окт: «Позвонить маме».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "задача на 25 октября купить молоко",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": "2026-10-25",
+      "time": null,
+      "date_kind": "exact"
+     },
+     "text": "Задача «Купить молоко» стоит на вс, 25 окт.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи что у меня 25 октября",
+     "kind": "list",
+     "text": "Вот ваши планы на вс, 25 окт: 3 дела.",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали эти две задачи",
+     "kind": "confirm",
+     "record": {
+      "type": "task",
+      "text": "Обновить материалы по презентации",
+      "date": "2026-10-25",
+      "time": "13:15",
+      "date_kind": "exact"
+     },
+     "text": "Здесь 3 записи. Удалить все?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Да, удалить все",
+      "Нет"
+     ]
+    },
+    {
+     "say": "нет",
+     "kind": "cancelled",
+     "text": "Хорошо, ничего не сохраняю.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-23",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "напомни сегодня в 13 не слушай",
+     "kind": "created",
+     "record": {
+      "type": "reminder",
+      "text": "Не слушай",
+      "date": "2026-10-21",
+      "time": "13:00",
+      "date_kind": "exact"
+     },
+     "text": "Напоминание на сегодня в 13:00 сохранил: «Не слушай».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "что у меня сегодня",
+     "kind": "list",
+     "text": "На сегодня запланировано 3 дела:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "удали её",
+     "kind": "clarify",
+     "record": {
+      "type": "task",
+      "text": "Подготовиться к встрече с Пульсом",
+      "date": "2026-10-21",
+      "time": "10:15",
+      "date_kind": "exact"
+     },
+     "text": "Какую именно?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Подготовиться к встрече с Пульсом · сегодня",
+      "Не слушай · сегодня",
+      "Встреча с Марией по презентации · сегодня",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "первую",
+     "kind": "deleted",
+     "record": {
+      "type": "task",
+      "text": "Подготовиться к встрече с Пульсом",
+      "date": "2026-10-21",
+      "time": "10:15",
+      "date_kind": "exact"
+     },
+     "text": "Готово, убрал из планов: «Подготовиться к встрече с Пульсом».",
+     "awaiting_reply": false,
+     "buttons": [
+      "Вернуть"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т12-24",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "запиши купить хлеб",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить хлеб",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово: «Купить хлеб», без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "запиши купить молоко",
+     "kind": "created",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Задачу «Купить молоко» сохранил, без срока.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "покажи задачи без срока",
+     "kind": "found",
+     "text": "Вот задачи без срока, свежие сверху:",
+     "awaiting_reply": false
+    },
+    {
+     "say": "отметь их выполненными",
+     "kind": "completed",
+     "record": {
+      "type": "task",
+      "text": "Купить молоко",
+      "date": null,
+      "time": null,
+      "date_kind": "none"
+     },
+     "text": "Готово: 2 дела — сделано.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-25",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "удали эти две задачи",
+     "kind": "clarify",
+     "text": "Не понял, какие именно. Назовите их или попросите показать список.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "удали их",
+     "kind": "clarify",
+     "text": "Не понял, какие именно. Назовите их или попросите показать список.",
+     "awaiting_reply": true,
+     "buttons": [
+      "Отменить"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "Т5-50",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "встреча с Ариной завтра в 16",
+     "kind": "created",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ариной",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "Добавил встречу «Встреча с Ариной» на завтра в 16:00.",
+     "awaiting_reply": false,
+     "buttons": [
+      "Отменить"
+     ]
+    },
+    {
+     "say": "отредактируй последнюю запись",
+     "kind": "clarify",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ариной",
+      "date": "2026-10-22",
+      "time": "16:00",
+      "date_kind": "exact"
+     },
+     "text": "На какой день перенести «Встреча с Ариной»?",
+     "awaiting_reply": true,
+     "buttons": [
+      "Сегодня",
+      "Пт, 23 окт",
+      "Сб, 24 окт",
+      "Чт, 29 окт",
+      "Отменить"
+     ]
+    },
+    {
+     "say": "на 17",
+     "kind": "updated",
+     "record": {
+      "type": "meeting",
+      "text": "Встреча с Ариной",
+      "date": "2026-10-22",
+      "time": "17:00",
+      "date_kind": "exact"
+     },
+     "text": "«Встреча с Ариной» — теперь завтра в 17:00.",
+     "awaiting_reply": false
+    }
+   ]
+  },
+  {
+   "id": "Т12-26",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши купить хлеб",
+     "kind": "created"
+    },
+    {
+     "say": "удали эту задачу",
+     "kind": "deleted"
+    }
+   ]
+  },
+  {
+   "id": "Т12-27",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши купить хлеб",
+     "kind": "created"
+    },
+    {
+     "say": "Запиши купить молоко",
+     "kind": "created"
+    },
+    {
+     "say": "покажи задачи без срока",
+     "kind": "found"
+    },
+    {
+     "say": "удали эти две",
+     "kind": "deleted"
+    }
+   ]
+  },
+  {
+   "id": "Т12-28",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Петей завтра в 15",
+     "kind": "created"
+    },
+    {
+     "say": "отредактируй последнюю запись",
+     "kind": "clarify"
+    },
+    {
+     "say": "перенеси на 16",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т12-29",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши купить хлеб",
+     "kind": "created"
+    },
+    {
+     "say": "измени последнюю запись",
+     "kind": "clarify"
+    },
+    {
+     "say": "назови купить батон",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т6-20",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Иваном завтра",
+     "kind": "clarify"
+    },
+    {
+     "say": "Напомни в пятницу в 9 позвонить маме",
+     "kind": "clarify"
+    },
+    {
+     "say": "в 15",
+     "kind": "created"
+    }
+   ]
+  },
+  {
+   "id": "Т6-21",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Иваном завтра",
+     "kind": "clarify"
+    },
+    {
+     "say": "Что у меня завтра?",
+     "kind": "list"
+    },
+    {
+     "say": "в 12",
+     "kind": "created"
+    }
+   ]
+  },
+  {
+   "id": "Т6-22",
+   "feature": "Ф6",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Иваном завтра",
+     "kind": "clarify"
+    },
+    {
+     "say": "хватит",
+     "kind": "cancelled"
+    }
+   ]
+  },
+  {
+   "id": "Т5-51",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни завтра утром позвонить маме",
+     "kind": "created"
+    }
+   ]
+  },
+  {
+   "id": "Т5-52",
+   "feature": "Ф5",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Олегом завтра в 15, напомни за полчаса",
+     "kind": "created"
+    }
+   ]
+  },
+  {
+   "id": "Т5-53",
+   "feature": "Ф5",
+   "clock": "2026-10-21T23:30:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Напомни в 7 утра выпить таблетку",
+     "kind": "created"
+    }
+   ]
+  },
+  {
+   "id": "Т18-4",
+   "feature": "Ф18",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Привет",
+     "kind": "help"
+    }
+   ]
+  },
+  {
+   "id": "Т18-5",
+   "feature": "Ф18",
+   "clock": "2026-10-21T23:30:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Привет, Стивенс",
+     "kind": "help"
+    }
+   ]
+  },
+  {
+   "id": "Т18-6",
+   "feature": "Ф18",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Пока",
+     "kind": "thanks"
+    }
+   ]
+  },
+  {
+   "id": "Т7-17",
+   "feature": "Ф7",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что у меня завтра?",
+     "kind": "list"
+    },
+    {
+     "say": "а встречи?",
+     "kind": "list"
+    }
+   ]
+  },
+  {
+   "id": "Т8-7",
+   "feature": "Ф8",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Найди встречи с Ваней",
+     "kind": "found"
+    },
+    {
+     "say": "а с Машей?",
+     "kind": "found"
+    }
+   ]
+  },
+  {
+   "id": "Т11-8",
+   "feature": "Ф11",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Поставь встречу с Еленой в субботу в 20:45",
+     "kind": "conflict"
+    },
+    {
+     "press": "Перенести существующую",
+     "kind": "clarify"
+    },
+    {
+     "say": "в 21:45",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т12-30",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Встреча с Олегом завтра в 15",
+     "kind": "created"
+    },
+    {
+     "say": "напомни о ней за час",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т12-31",
+   "feature": "Ф12",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "Запиши встречу с Иваном послезавтра в 11",
+     "kind": "created"
+    },
+    {
+     "say": "Стивс, там не Иван, а Пётр был",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т19-1",
+   "feature": "Ф19",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "Что у меня с Иваном?",
+     "kind": "person"
+    },
+    {
+     "say": "перенеси её на завтра в 18",
+     "kind": "updated"
+    }
+   ]
+  },
+  {
+   "id": "Т19-2",
+   "feature": "Ф19",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "sandbox",
+   "note": null,
+   "steps": [
+    {
+     "say": "что у меня с Машей на этой неделе",
+     "kind": "person"
+    }
+   ]
+  },
+  {
+   "id": "Т19-3",
+   "feature": "Ф19",
+   "clock": "2026-10-21T10:00:00+03:00",
+   "mode": "account",
+   "note": null,
+   "steps": [
+    {
+     "say": "досье на Аркадия",
+     "kind": "person"
+    }
+   ]
+  }
+ ]
+}
