@@ -8,6 +8,11 @@ const task: RecordItem = {
 };
 
 describe('edit form', () => {
+  it('busy needs start and end, sends end_time', () => {
+    const work: RecordItem = { ...task, type: 'busy', text: 'Работа', time: '09:00', end_time: '18:00', status: null };
+    expect(validate(work, { text: 'Работа', date: '2026-10-22', time: '09:00', end: '' })).toEqual({ datetime: 'edit_err_interval' });
+    expect(buildPatch(work, { text: 'Работа', date: '2026-10-22', time: '09:00', end: '17:00' })).toEqual({ end_time: '17:00' });
+  });
   it('sends only changed fields', () => {
     expect(buildPatch(task, { text: 'Отчёт', date: '2026-10-22', time: '12:00' })).toEqual({ time: '12:00' });
     expect(buildPatch(task, { text: 'Отчёт', date: '', time: '' })).toEqual({ date: null, time: null });

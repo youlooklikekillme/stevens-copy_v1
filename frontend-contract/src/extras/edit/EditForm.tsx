@@ -22,6 +22,8 @@ export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
   const [text, setText] = useState(record.text);
   const [date, setDate] = useState(record.date ?? '');
   const [time, setTime] = useState(record.time ?? '');
+  const [end, setEnd] = useState(record.end_time ?? '');
+  const interval = record.type === 'busy' || !!record.end_time;
   const [errors, setErrors] = useState<EditErrors>({});
   const [failure, setFailure] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
@@ -41,7 +43,7 @@ export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
   }, [text]);
 
   const save = async () => {
-    const values = { text, date, time };
+    const values = interval ? { text, date, time, end } : { text, date, time };
     const found = validate(record, values);
     setErrors(found);
     if (found.text || found.datetime || record.id === null) return;
@@ -85,17 +87,24 @@ export function EditForm({ record, onSaved, onCancel, onDelete }: Props) {
         />
         {errors.text && <span className="edit-form__error">{T[errors.text]}</span>}
       </label>
-      {record.type !== 'note' && <div className="edit-form__row">
+      {record.type !== 'note' && <div className={`edit-form__row ${interval ? 'edit-form__row--interval' : ''}`}>
         <label className="edit-form__field edit-form__field--date">
           <span className="edit-form__label">{record.date_kind === 'deadline' ? T.edit_date_deadline : T.edit_date}</span>
           <input className="edit-form__input" type="date" value={date} disabled={busy}
             onChange={(e) => { setDate(e.target.value); setErrors((v) => ({ ...v, datetime: undefined })); }} />
         </label>
         <label className="edit-form__field edit-form__field--time">
-          <span className="edit-form__label">{T.edit_time}</span>
+          <span className="edit-form__label">{interval ? T.edit_time_from : T.edit_time}</span>
           <input className="edit-form__input" type="time" value={time} disabled={busy}
             onChange={(e) => { setTime(e.target.value); setErrors((v) => ({ ...v, datetime: undefined })); }} />
         </label>
+        {interval && (
+          <label className="edit-form__field edit-form__field--time">
+            <span className="edit-form__label">{T.edit_time_to}</span>
+            <input className="edit-form__input" type="time" value={end} disabled={busy}
+              onChange={(e) => { setEnd(e.target.value); setErrors((v) => ({ ...v, datetime: undefined })); }} />
+          </label>
+        )}
       </div>}
       {errors.datetime && <span className="edit-form__error">{T[errors.datetime]}</span>}
       {createdText(record) && <span className="edit-form__created">{createdText(record)}</span>}

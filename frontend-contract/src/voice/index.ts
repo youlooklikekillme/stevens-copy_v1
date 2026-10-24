@@ -116,6 +116,9 @@ let rearmTimer: ReturnType<typeof setTimeout> | undefined;
 /** Фраза, которую Стивенс сейчас говорит вслух, и есть ли в ней имя */
 let echoHasName = false;
 let echoHeard = false;
+/** Пока он говорит, фоновая запись что-то услышала — это его голос, после фразы начинаем запись заново */
+let echoOn = false;
+let echoAny = false;
 
 function cleanupAudio(): void {
   clearInterval(levelTimer);
@@ -173,10 +176,19 @@ function startLevel(media: MediaStream): void {
   }
 }
 
-function transcriptOf(event: RecognitionEvent): string {
-  let text = '';
-  for (let i = 0; i < event.results.length; i += 1) text += event.results[i][0].transcript;
-  return text;
+/** Куски распознанного по порядку. Склеиваем через пробел: «16.0» + «16:00» не должны слипаться в «16.016:00» */
+function piecesOf(event: RecognitionEvent): string[] {
+  const pieces: string[] = [];
+  for (let i = 0; i < event.results.length; i += 1) pieces.push(event.results[i][0].transcript.trim());
+  return pieces;
+}
+
+/** В каком куске имя: всё, что было до этого куска (его же озвучка, чужая речь), во фразу не попадает */
+function wakePiece(pieces: string[]): number {
+  for (let i = 0; i < pieces.length; i += 1) {
+    if (WAKE_WORD.test(pieces.slice(i).join(' ')) && !WAKE_WORD.test(pieces.slice(i + 1).join(' '))) return i;
+  }
+  return -1;
 }
 
 /**
@@ -211,6 +223,8 @@ function arm(inGesture = false): void {
   // поэтому имя и просьбу говорим на одном дыхании: «Стивенс, завтра в 10 созвон»
   rec.continuous = !isSafari();
   let woke = false;
+  /** С какого куска распознанного начинается фраза после имени */
+  let wakeFrom = 0;
   let resolveEnded: () => void = () => undefined;
   armedEnded = new Promise((resolve) => { resolveEnded = resolve; });
 
@@ -221,9 +235,10 @@ function arm(inGesture = false): void {
   };
 
   rec.onresult = (event) => {
-    const whole = transcriptOf(event);
+    const pieces = piecesOf(event);
     if (!woke) {
-      const hit = WAKE_WORD.exec(whole);
+      if (echoOn && pieces.some(Boolean)) echoAny = true;
+      const hit = WAKE_WORD.exec(pieces.join(' '));
       if (!hit) return;
       if (echoHasName) {
         // Скорее всего, это он сам себя услышал из динамиков
@@ -232,6 +247,7 @@ function arm(inGesture = false): void {
       }
       // Имя услышано: эта запись становится обычной
       woke = true;
+      wakeFrom = Math.max(0, wakePiece(pieces));
       armedRec = null;
       emit('armed', false);
       recognition = rec;
@@ -249,8 +265,10 @@ function arm(inGesture = false): void {
         startLevel(media);
       }).catch(() => undefined);
     }
-    const hit = WAKE_WORD.exec(whole);
-    const shown = (hit ? whole.slice(hit.index + hit[0].length) : whole).trim();
+    // Браузер может переписать уже распознанное и потерять имя — тогда берём от того же куска, а не весь текст
+    const tail = pieces.slice(wakeFrom).join(' ');
+    const hit = WAKE_WORD.exec(tail);
+    const shown = (hit ? tail.slice(hit.index + hit[0].length) : tail).replace(/\s+/g, ' ').trim();
     if (event.results[event.results.length - 1]?.isFinal && isCancel(shown)) {
       log('отмена голосом');
       cancelled = true;
@@ -362,11 +380,11 @@ export const voice = {
       let interim = '';
       for (let i = event.resultIndex; i < event.results.length; i += 1) {
         const result = event.results[i];
-        if (result.isFinal) finalText = `${finalText} ${result[0].transcript}`.trim();
-        else interim += result[0].transcript;
+        if (result.isFinal) finalText = `${finalText} ${result[0].transcript.trim()}`.trim();
+        else interim = `${interim} ${result[0].transcript.trim()}`.trim();
       }
       interimText = interim;
-      const shown = (finalText + interim).trim();
+      const shown = `${finalText} ${interim}`.trim();
       if (!interim && isCancel(shown)) {
         log('отмена голосом');
         cancelled = true;
@@ -439,11 +457,15 @@ export const voice = {
 
   /** Что Стивенс говорит вслух (null — замолчал). Его голос из динамиков не должен звать его самого */
   setEcho(text: string | null): void {
-    const wasHeard = echoHeard;
+    const wasHeard = echoHeard || echoAny;
     echoHasName = !!text && WAKE_WORD.test(text);
     echoHeard = false;
-    // Имя из его фразы уже в тексте фоновой записи — начинаем её заново
-    if (!text && wasHeard && armedRec && wantArmed) {
+    echoOn = !!text;
+    if (text) return;
+    echoAny = false;
+    // Его фраза уже в тексте фоновой записи — начинаем её заново: иначе она попадёт в следующую просьбу,
+    // а длинная запись хуже слышит имя
+    if (wasHeard && armedRec && wantArmed) {
       void disarmAndWait().then(() => {
         if (wantArmed) rearmTimer = setTimeout(arm, 100);
       });

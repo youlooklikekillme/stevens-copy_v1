@@ -14,13 +14,16 @@ MONTHS_PREP = ["январе", "феврале", "марте", "апреле", "
                "сентябре", "октябре", "ноябре", "декабре"]
 WEEKDAYS_SHORT = ["пн", "вт", "ср", "чт", "пт", "сб", "вс"]
 
-TYPE_WORD = {"task": "задача", "reminder": "напоминание", "meeting": "встреча", "note": "заметка"}
-TYPE_GEN_PLURAL = {"task": "задач", "reminder": "напоминаний", "meeting": "встреч", "note": "заметок"}
+TYPE_WORD = {"task": "задача", "reminder": "напоминание", "meeting": "встреча", "note": "заметка",
+             "busy": "занятость"}
+TYPE_GEN_PLURAL = {"task": "задач", "reminder": "напоминаний", "meeting": "встреч", "note": "заметок",
+                   "busy": "занятостей"}
 TYPE_FORMS = {
     "task": ("задача", "задачи", "задач"),
     "reminder": ("напоминание", "напоминания", "напоминаний"),
     "meeting": ("встреча", "встречи", "встреч"),
     "note": ("заметка", "заметки", "заметок"),
+    "busy": ("занятость", "занятости", "занятостей"),
 }
 
 
@@ -89,6 +92,8 @@ def when_text(record: dict, today: date, speech: bool = False) -> str:
         return "без срока"
     if kind == "deadline":
         return f"до {fmt(value, today)}"
+    if record.get("time") and record.get("end_time"):
+        return f"{fmt(value, today)} с {record['time']} до {record['end_time']}"
     if record.get("time"):
         return f"{fmt(value, today)} в {record['time']}"
     return fmt(value, today)
@@ -110,3 +115,11 @@ def client_now(client_time: str) -> datetime:
         return datetime.fromisoformat(client_time).replace(tzinfo=None)
     except (TypeError, ValueError):  # не прислали или прислали не дату
         return datetime.now()
+
+
+def shift_end(old_start: str, old_end: str, new_start: str) -> str:
+    """Конец интервала, когда начало передвинули: длина остаётся прежней."""
+    to_min = lambda t: int(t[:2]) * 60 + int(t[3:])
+    length = (to_min(old_end) - to_min(old_start)) % (24 * 60)
+    end = (to_min(new_start) + length) % (24 * 60)
+    return f"{end // 60:02d}:{end % 60:02d}"

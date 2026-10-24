@@ -8,6 +8,15 @@ const rec = (over: Partial<RecordItem>): RecordItem => ({
   status: 'open', created_at: null, repeat: null, demo: false, marks: [], highlight: null, ...over,
 });
 
+describe('busy interval', () => {
+  it('shows the interval and is not past until it ends', () => {
+    const work = rec({ type: 'busy', date: '2026-10-21', time: '09:00', end_time: '18:00', status: null });
+    expect(metaParts(work, false, today).map((p) => p.text)).toEqual(['09:00–18:00']);
+    expect(isPast(work, today)).toBe(false);
+    expect(isPast(work, new Date(2026, 9, 21, 18, 30))).toBe(true);
+  });
+});
+
 describe('dates', () => {
   it('formats short and relative dates', () => {
     expect(shortDate('2026-10-19', today)).toBe('пн, 19 окт');

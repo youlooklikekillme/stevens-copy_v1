@@ -195,6 +195,7 @@
 .card__body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: var(--sp-1); }
 .card__meta { display: flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-meta); color: var(--c-text-2); line-height: 1.4; }
 .card__meta-text { flex: 1; min-width: 0; font-variant-numeric: tabular-nums; }
+.card__meta-text > span { white-space: nowrap; }
 .card__icon { color: var(--c-accent); flex-shrink: 0; }
 .card__text { font-size: var(--fs-body); line-height: 1.4; color: var(--c-text); overflow-wrap: anywhere; }
 .card__state { font-size: var(--fs-small); color: var(--c-text-2); display: inline-flex; align-items: center; gap: var(--sp-1); white-space: nowrap; }
@@ -207,6 +208,10 @@
 .card--muted .card__text, .card--muted .card__icon { color: var(--c-text-2); }
 .card--done .card__text { text-decoration: line-through; text-decoration-color: var(--c-placeholder); }
 .card--clickable { cursor: pointer; }
+/* Занятость: пары, работа, учёба — серая полоса, без акцентного цвета */
+.card--busy { background: var(--c-busy-bg); border-color: transparent; box-shadow: inset 3px 0 0 var(--c-busy-line); }
+.card--busy .card__icon { color: var(--c-text-2); }
+.card--busy.card--conflict { background: var(--c-alarm-bg); border-color: var(--c-alarm-line); }
 
 /* ── Пилюли (02, 4) ─────────────────────────────────── */
 .pill {

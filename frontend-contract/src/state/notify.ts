@@ -37,7 +37,8 @@ function isoDay(d: Date): string {
 }
 
 function fireAt(record: RecordItem): number | null {
-  if (!record.date || !record.time || record.demo || record.status === 'done' || record.type === 'task') return null;
+  if (!record.date || !record.time || record.demo || record.status === 'done' || record.type === 'task'
+    || record.type === 'busy') return null;
   if (record.marks.includes('deleted')) return null;
   const [h, m] = record.time.split(':').map(Number);
   const [y, mo, d] = record.date.split('-').map(Number);

@@ -23,10 +23,18 @@ export function gridRange(year: number, month: number): { from: string; to: stri
   return { from: isoDate(days[0]), to: isoDate(days[days.length - 1]) };
 }
 
+/** Точки — только дела: занятость рисуется отдельной серой полоской */
 export function countByDate(records: RecordItem[]): Map<string, number> {
   const map = new Map<string, number>();
-  for (const r of records) if (r.date && !r.marks.includes('deleted')) map.set(r.date, (map.get(r.date) ?? 0) + 1);
+  for (const r of records) {
+    if (r.date && r.type !== 'busy' && !r.marks.includes('deleted')) map.set(r.date, (map.get(r.date) ?? 0) + 1);
+  }
   return map;
+}
+
+/** Дни, где есть занятость: пары, работа, учёба */
+export function busyDates(records: RecordItem[]): Set<string> {
+  return new Set(records.filter((r) => r.date && r.type === 'busy' && !r.marks.includes('deleted')).map((r) => r.date as string));
 }
 
 /** id встреч дня, у которых совпадает время начала с другой встречей */

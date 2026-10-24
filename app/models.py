@@ -18,6 +18,7 @@ class TaskType(str, enum.Enum):
     meeting = "meeting"
     reminder = "reminder"
     note = "note"          # заметка: без даты и времени, вне расписания
+    busy = "busy"          # занятость: «работа с 9 до 18» — интервал в расписании, без напоминаний и галочки
 
 
 class TaskStatus(str, enum.Enum):
@@ -73,6 +74,7 @@ class Series(Base):
     type: Mapped[TaskType] = mapped_column(Enum(TaskType, name="record_type"), nullable=False)
     text: Mapped[str] = mapped_column(String(300), nullable=False)
     time: Mapped[str | None] = mapped_column(String(5), nullable=True)
+    end_time: Mapped[str | None] = mapped_column(String(5), nullable=True)  # занятость: до скольки
     weekdays: Mapped[str] = mapped_column(String(13), nullable=False)    # «1,3» — пн = 0
     until: Mapped[str | None] = mapped_column(String(10), nullable=True)  # последний день, None — без конца
     filled_until: Mapped[str] = mapped_column(String(10), nullable=False)  # до какого дня записи уже созданы
@@ -100,6 +102,7 @@ class Record(Base):
     text: Mapped[str] = mapped_column(String(300), nullable=False)
     date: Mapped[str | None] = mapped_column(String(10), nullable=True)  # "YYYY-MM-DD"
     time: Mapped[str | None] = mapped_column(String(5), nullable=True)   # "HH:MM"
+    end_time: Mapped[str | None] = mapped_column(String(5), nullable=True)  # "HH:MM": до скольки, у занятости
     date_kind: Mapped[DateKind] = mapped_column(Enum(DateKind, name="record_date_kind"), nullable=False)
     status: Mapped[TaskStatus | None] = mapped_column(Enum(TaskStatus, name="record_status"), nullable=True)
     created_at: Mapped[dt | None] = mapped_column(DateTime(timezone=True), nullable=True)
@@ -124,6 +127,7 @@ class Record(Base):
             "text": self.text,
             "date": self.date,
             "time": self.time,
+            "end_time": self.end_time,
             "date_kind": self.date_kind.value,
             "status": self.status.value if self.status else None,
             "created_at": self.created_at.isoformat() if self.created_at else None,

@@ -24,9 +24,12 @@ async def lifespan(app: FastAPI):
     async with engine.connect() as conn:  # type: ignore
         conn = await conn.execution_options(isolation_level="AUTOCOMMIT")
         await conn.exec_driver_sql("ALTER TYPE record_type ADD VALUE IF NOT EXISTS 'note'")
+        await conn.exec_driver_sql("ALTER TYPE record_type ADD VALUE IF NOT EXISTS 'busy'")
         # Колонки, которых не было в старой таблице: повторы и пометка демо-записей
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS series_id INTEGER REFERENCES series(id)")
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS repeat VARCHAR(24)")
+        await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS end_time VARCHAR(5)")
+        await conn.exec_driver_sql("ALTER TABLE series ADD COLUMN IF NOT EXISTS end_time VARCHAR(5)")
         await conn.exec_driver_sql("ALTER TABLE records ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT false")
         await conn.exec_driver_sql("CREATE INDEX IF NOT EXISTS ix_records_series_id ON records (series_id)")
         await conn.exec_driver_sql("ALTER TABLE sandboxes ADD COLUMN IF NOT EXISTS seen_at TIMESTAMPTZ NOT NULL DEFAULT now()")

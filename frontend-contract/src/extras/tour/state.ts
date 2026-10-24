@@ -21,6 +21,7 @@ const EXPECT: Kind[][] = [
   ['confirm', 'created'],
   ['found'],
   ['found'],
+  ['created', 'found'],
   ['created', 'completed'],
 ];
 const STEP_DONE_MS = 1400;

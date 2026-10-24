@@ -72,7 +72,7 @@ export interface ChatResponse {
   buttons: Button[];
 }
 
-export type RecordType = 'task' | 'reminder' | 'meeting' | 'note';
+export type RecordType = 'task' | 'reminder' | 'meeting' | 'note' | 'busy';
 export type DateKind = 'exact' | 'deadline' | 'none';
 /** deleted — допы Д2/Д10: запись удалена (карточка «Удалено») */
 export type RecordMark = 'new' | 'draft' | 'conflict' | 'deleted';
@@ -86,6 +86,8 @@ export interface RecordItem {
   text: string;
   date: LocalDate | null;
   time: LocalTime | null;
+  /** До скольки: у занятости всегда, у встречи — если сказали «с … до …» */
+  end_time?: LocalTime | null;
   date_kind: DateKind;
   status: 'open' | 'done' | null;
   created_at: IsoMoment | null;
@@ -185,6 +187,7 @@ export interface RecordPatch {
   text?: string;
   date?: LocalDate | null;
   time?: LocalTime | null;
+  end_time?: LocalTime | null;
   status?: 'open' | 'done';
 }
 

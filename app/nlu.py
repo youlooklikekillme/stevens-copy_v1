@@ -50,7 +50,7 @@ STOPWORDS = {
     "сделал", "сделала", "сделано", "который", "которую", "мы", "нам", "нас", "а", "же", "уже", "там",
     "сегодня", "завтра", "вчера", "послезавтра",
     "последнюю", "последний", "последнее", "последняя", "предыдущую", "эта", "перенеси", "перенести", "передвинь",
-    "сдвинь", "подвинь", "поменяй", "измени", "время", "дату", "позже", "раньше", "выполненной", "готово",
+    "сдвинь", "подвинь", "поменяй", "измени", "отредактируй", "отредактируйте", "редактируй", "отредактировать", "выполненными", "время", "дату", "позже", "раньше", "выполненной", "готово",
     "убери", "убрать", "сотри", "стереть", "очисти", "удалите", "всех", "дни", "дней", "день", "дел", "время",
     "записей", "ней", "нему", "неё", "него", "этой", "этому", "из", "переименуй", "назови", "сделай",
     "заметку", "заметка", "заметки", "заметок", "заметках", "идею", "идея", "идеи", "идей", "мысль", "мысли",
@@ -101,10 +101,13 @@ class Parse:
     until: date | None = None   # create: повтор «до конца года» — последний день; None — без конца
     series_all: bool = False    # delete: «убери планёрку вообще» — все предстоящие дни повтора
     series_one: bool = False    # delete: «удали только ближайшую планёрку» — один день повтора
+    group: bool = False         # delete: «удали эти две», «удали их» — все показанные только что записи
+    group_count: int | None = None  # «эти две» → 2: если показано другое число, переспросим
     day_part: str | None = None  # list: «сегодня вечером» — утром | днём | вечером
     next: bool = False          # search: «какое следующее дело», «ближайшая встреча» — ближайшая запись впереди
     only_when: bool = False     # во фразе только день: «а на завтра?» — список, а в уточнении это ответ
     doubt: list[dict] = field(default_factory=list)  # create: почему разбор неуверенный — спросим «Верно понял?»
+    end_time: str | None = None  # «с 9 до 18»: до скольки (у занятости, у встречи — если сказали)
 
 
 # ── Время ─────────────────────────────────────────────
@@ -231,6 +234,59 @@ def _parse_time(text: str) -> tuple[str | None, bool, list[tuple[int, int]]]:
                 ambiguous = True
         return f"{h:02d}:00", ambiguous, spans
     return None, False, spans
+
+
+# Интервал «с 9 до 18», «с 10:00 до 13:20», «с 9 вечера до 11», «9:00–18:00», «с 9-18»
+_IV_H = r"(\d{1,2})(?:[:.](\d{2}))?(?:\s*(?:час(?:а|ов)?|ч\.?))?(?:\s+(утра|дня|вечера|ночи))?"
+_IV_NOT_DATE = rf"(?!\s*(?:числ|{MONTH_RE}|[:.]?\d))"
+INTERVAL_RES = (
+    re.compile(rf"\b(?:с|со|от)\s+{_IV_H}\s+до\s+{_IV_H}\b{_IV_NOT_DATE}", I),
+    re.compile(rf"(?:\b(?:с|со|в)\s+)?(\d{{1,2}})[:.](\d{{2}})()\s*[-–—]\s*(\d{{1,2}})[:.](\d{{2}})()\b{_IV_NOT_DATE}", I),
+    re.compile(rf"\b(?:с|со)\s+(\d{{1,2}})()()\s*[-–—]\s*(\d{{1,2}})()()\b{_IV_NOT_DATE}", I),
+)
+
+
+def _iv_hour(h: int, part: str) -> int:
+    if part in ("вечера", "дня") and h < 12:
+        return h + 12
+    if part == "ночи" and h == 12:
+        return 0
+    return h
+
+
+def minutes_of(hhmm: str) -> int:
+    h, m = hhmm.split(":")
+    return int(h) * 60 + int(m)
+
+
+def parse_interval(text: str) -> tuple[str, str, bool, tuple[int, int]] | None:
+    """«с 9 до 18» → начало, конец, «утро или вечер — неясно» и кусок фразы. Не интервал — None."""
+    for regex in INTERVAL_RES:
+        m = regex.search(text)
+        if not m:
+            continue
+        h1, m1, p1, h2, m2, p2 = m.groups()[:6]
+        sh, eh = int(h1), int(h2)
+        sm, em = int(m1 or 0), int(m2 or 0)
+        p1, p2 = (p1 or "").lower(), (p2 or "").lower()
+        if sh > 24 or eh > 24 or sm > 59 or em > 59:
+            continue
+        sh, eh = _iv_hour(sh, p1 or (p2 if p2 in ("утра", "дня", "вечера") and sh < eh else "")), _iv_hour(eh, p2)
+        ambiguous = False
+        if not p1 and not p2:
+            if 1 <= sh <= 7 and eh <= 12 and eh + 12 <= 24:
+                # «с 2 до 5» — днём; «с 7 до 9» — утро или вечер? Ставим вечер и переспрашиваем
+                sh, eh, ambiguous = sh + 12, eh + 12, sh >= 6 or eh >= 8
+            elif eh < sh and eh + 12 > sh and eh < 12:
+                eh += 12  # «с 10 до 2» — до 14:00
+        if p1 and not p2 and eh < sh and eh + 12 > sh and eh < 12:
+            eh += 12      # «с 9 утра до 6»
+        sh, eh = sh % 24, eh % 24
+        start, end = f"{sh:02d}:{sm:02d}", f"{eh:02d}:{em:02d}"
+        if start == end:
+            continue
+        return start, end, ambiguous, m.span()
+    return None
 
 
 # «через 11 минут», «через полчаса», «через час и 20 минут», «через пару дней», «через неделю»
@@ -600,6 +656,8 @@ def _filter_type(text: str) -> str | None:
         return "task"
     if NOTE_WORD_RE.search(lower):
         return "note"
+    if re.search(r"\bзанятост", lower):
+        return "busy"
     return None
 
 
@@ -678,8 +736,11 @@ LIST_RE = re.compile(rf"(что\s+у\s+меня|какие\s+(?:у\s+меня\s+
 OFFTOPIC_RE = re.compile(r"(погод|анекдот|шутк|курс\s+(?:доллар|евро|валют)|новост|рецепт|кто\s+так|переведи|столиц|сколько\s+будет|расскажи\s+(?:о|про)\s+себе|как\s+дела|фильм|музык|игр[ау]|стих)", I)
 CREATE_VERB_RE = re.compile(r"^(?:пожалуйста\s+)?(напомни(?:те)?(?:\s+мне)?|поставь|запиши|добавь|создай|запланируй|назначь|внеси|заведи)\b", I)
 DONE_RE = re.compile(r"^(?:готово|сделано|выполнено|сделал|сделала)[\s.!]*$", I)
+# «Эти две», «их», «обе», «все три» — несколько записей, только что показанных
+GROUP_RE = re.compile(r"\b(?:(?:эти|этих|их|обе|оба|обеих|обоих)(?:\s+(?:вс[еи]|две|два|три|четыре|пять))?"
+                      r"|вс[еи]\s+(?:эти|две|два|три|четыре|пять)|(?:две|два|три|четыре|пять)\s+эти)\b", I)
 REF_RE = re.compile(rf"\b(её|ее|его|это|эту|этот|эта|ней|нему|неё|него|этой|этому|последн\w*|предыдущ\w*)\b", I)
-MOVE_RE = re.compile(r"^(?:перенеси(?:те)?|перенести|передвинь|сдвинь|подвинь|поменяй|измени)\b", I)
+MOVE_RE = re.compile(r"^(?:перенеси(?:те)?|перенести|передвинь|сдвинь|подвинь|поменяй|измени|отредактируй(?:те)?|редактируй|отредактировать)\b", I)
 # Правка записи: название, тип, заметка
 RENAME_RE = re.compile(r"^(?:переименуй(?:те)?|переименовать|переназови|назови|(?:поменяй|измени|смени)\s+название)\b\s*(?P<rest>.*)$", I)
 RETYPE_RE = re.compile(
@@ -718,6 +779,13 @@ SOURCE_RE = re.compile(
     I,
 )
 TIME_ON_RE = re.compile(r"\bна\s+(\d{1,2})\b(?![:.]\d|\s*(?:час|минут|числ|январ|феврал|март|апрел|ма[яй]|июн|июл|август|сентябр|октябр|ноябр|декабр))", I)
+BUSY_WORD_RE = re.compile(r"\b(?:занятост\w*|(?:я\s+)?(?:буду\s+)?занят[аы]?)\b", I)
+BUSY_PLACES = {"работе": "работа", "парах": "пары", "учёбе": "учёба", "учебе": "учёба", "лекциях": "лекции",
+               "школе": "школа", "универе": "универ", "университете": "университет", "институте": "институт",
+               "колледже": "колледж", "тренировке": "тренировка", "смене": "смена", "занятиях": "занятия"}
+BUSY_VERBS = {"работаю": "работа", "работать": "работа", "учусь": "учёба", "учиться": "учёба", "тренируюсь": "тренировка",
+              "тренироваться": "тренировка", "занимаюсь": "занятия", "заниматься": "занятия"}
+BUSY_PLACE_RE = re.compile(rf"^(?:на|в|во)\s+({'|'.join(BUSY_PLACES)})\b", I)
 REMIND_RE = re.compile(r"(^напомни|\bнапомн(?:и|ите|ить|ил|ила|им)\b|\bнапоминани)", I)
 
 
@@ -818,6 +886,9 @@ REPEAT_RES = (
     # «по вторникам», «по понедельникам и четвергам». «С понедельника по среду» — не повтор: там «по» + один день
     re.compile(rf"(?:^|(?<=\s))(?:(?:каждую\s+неделю|еженедельно)\s+)?по\s+(?P<days>{_DAY_MANY}(?:{_JOIN}{_DAY_MANY})*)\b", I),
 )
+WEEKDAY_RANGE_RE = re.compile(r"\bс\s+(понедельника|вторника|среды|четверга|пятницы|субботы|воскресенья)\s+"
+                              r"(?:по|до)\s+(понедельник|вторник|среду|четверг|пятницу|субботу|воскресенье|"
+                              r"понедельника|вторника|среды|четверга|пятницы|субботы|воскресенья)\b", I)
 REPEAT_WEEKDAYS_RE = re.compile(r"\b(?:по\s+будн(?:ям|им\s+дням|им)|кажд(?:ый|ые)\s+будни(?:й\s+день|е\s+дни)?|в\s+будни)\b", I)
 REPEAT_WEEKEND_RE = re.compile(r"\b(?:по\s+выходным(?:\s+дням)?|кажд(?:ые|ый)\s+выходн(?:ые|ой))\b", I)
 REPEAT_DAILY_RE = re.compile(r"\b(?:каждый\s+день|ежедневно)\b", I)
@@ -908,6 +979,11 @@ def parse_repeat(text: str, now: datetime) -> Repeat | None:
         if m := regex.search(text):
             days += group
             spans.append(m.span())
+    if not days and parse_interval(text) and (m := WEEKDAY_RANGE_RE.search(text)):
+        # «Учёба с понедельника по пятницу с 9 до 15» — каждую неделю эти дни. Без часов это период списка
+        first, last = _day_of(m.group(1)), _day_of(m.group(2))
+        days = [d % 7 for d in range(first, last + (7 if last < first else 0) + 1)]
+        spans.append(m.span())
     if not days:
         return None
     until, until_span = _until(text, now.date())
@@ -951,7 +1027,9 @@ def _with_repeat(text: str, now: datetime) -> Parse | None:
         return None
     start = max(inner.date or now.date(), now.date())
     inner.repeat_days, inner.until = rep.days, rep.until
-    inner.date, inner.date_kind = first_day(rep.days, start, now, inner.time), "exact"
+    # Занятость сегодня подходит, пока не кончилась: «по будням работа с 9 до 18» в 10 утра — уже сегодня
+    till = inner.end_time if inner.type == "busy" and inner.end_time and inner.end_time > (inner.time or "") else inner.time
+    inner.date, inner.date_kind = first_day(rep.days, start, now, till), "exact"
     inner.vague_period = False
     return inner
 
@@ -1070,8 +1148,16 @@ def parse(raw: str, now: datetime) -> Parse:
             return result
         text = rest
 
+    # «Работа с 9 до 18»: интервал вырезаем сразу, чтобы «до 18» не путало дату и время
+    interval = parse_interval(text)
+    if interval:
+        text = " ".join(_cut(text, [interval[3]]).split()).strip(" ,.")
+    busy_word = bool(BUSY_WORD_RE.search(text))
+
     lower = text.lower()
     time, ambiguous, time_spans, info = parse_when(text, now)
+    if interval and not time:
+        time, ambiguous = interval[0], interval[2]
 
     if HELP_RE.search(lower):
         result.intent = "help"
@@ -1111,10 +1197,15 @@ def parse(raw: str, now: datetime) -> Parse:
         elif one := re.search(r"\bтолько\s+(?:(?:одн[уа]|один|эт[уоа]|этот|ближайш\w*|следующ\w*)\b)?", text, I):
             result.series_one = True
             spans.append(one.span())
+        if group := GROUP_RE.search(text):
+            result.group = True
+            counts = {"обе": 2, "оба": 2, "обеих": 2, "обоих": 2, "две": 2, "два": 2, "три": 3, "четыре": 4, "пять": 5}
+            result.group_count = next((counts[w] for w in group[0].lower().split() if w in counts), None)
+            spans.append(group.span())
         rest = _cut(text, spans)
         result.keywords, result.required = search_keywords(rest, result.filter_type)
-        result.ref = bool(REF_RE.search(rest)) or bool(DONE_RE.search(lower))
-        result.bulk = bool(BULK_RE.search(lower))
+        result.ref = bool(REF_RE.search(rest)) or bool(DONE_RE.search(lower)) or result.group
+        result.bulk = bool(BULK_RE.search(lower)) and not result.group
         if not all_days:
             result.date = info.date
             if result.bulk and info.period and not info.date:
@@ -1175,6 +1266,8 @@ def parse(raw: str, now: datetime) -> Parse:
         need = _free_duration(lower)
         result.duration = need or 60
         result.time = time  # «Я свободен в пятницу в 15?» — да или нет на это время
+        if interval:  # «Я свободен завтра с 14 до 16?» — да или нет на весь промежуток
+            result.duration = max(30, (minutes_of(interval[1]) - minutes_of(interval[0])) % (24 * 60))
         # Без «на час» показываем все окна от получаса, для встречи — от часа
         result.window = need or (60 if subject else 30)
         rest = _cut(lower, info.spans).lower()
@@ -1271,12 +1364,16 @@ def parse(raw: str, now: datetime) -> Parse:
     # «Купить хлеб», «позвонить в банк» — голое дело без срока, как в списке покупок
     bare_todo = bool(re.match(r"^[а-яё]{3,}(?:ть|ться|чь|сти|зти)\s+\S", lower)) and len(keywords(text)) >= 2 \
         and not re.search(r"что-(?:нибудь|то|либо)|\bэто\b", lower)
-    if not (has_verb or is_meeting or has_need or is_task_word or bare_todo
+    if not (has_verb or is_meeting or has_need or is_task_word or bare_todo or busy_word
             or ((info.date or info.period or time) and len(keywords(_cut(text, info.spans + time_spans))) >= 1)):
         return result  # unknown
 
     result.intent = "create"
-    result.type = "meeting" if is_meeting else "reminder" if is_reminder else "task"
+    # Интервал «с … до …» без встречи и напоминания — занятость: пары, работа, учёба
+    is_busy = busy_word or (bool(interval) and not is_meeting and not is_reminder)
+    result.type = "busy" if is_busy else "meeting" if is_meeting else "reminder" if is_reminder else "task"
+    if interval and result.type in ("busy", "meeting"):
+        result.end_time = interval[1]
     result.time = time
     result.time_ambiguous = ambiguous
     result.date = info.date
@@ -1299,6 +1396,16 @@ def parse(raw: str, now: datetime) -> Parse:
     body = strip_fillers(body)
     if is_reminder:
         body = re.sub(r"^(?:про|о|об|насчёт|насчет)\s+", "", body, flags=I)
+    if result.type == "busy":
+        # «Я занят: пары» → «Пары»; «занятость работа» → «Работа»; просто «я занят» — спросим, чем
+        body = BUSY_WORD_RE.sub(" ", body)
+        body = re.sub(r"^\s*(?:я|у\s+меня)\b|\b(?:я|буду|будут|будет|у\s+меня)\b", " ", body, flags=I)
+        body = " ".join(body.split()).strip(" ,.:;!—-")
+        if m := BUSY_PLACE_RE.match(body):  # «на работе» → «Работа», «на парах» → «Пары»
+            body = BUSY_PLACES[m.group(1).lower()] + body[m.end():]
+        word, _, tail = body.partition(" ")
+        if word.lower() in BUSY_VERBS:  # «я работаю с 9 до 18» → «Работа», «учусь» → «Учёба»
+            body = f"{BUSY_VERBS[word.lower()]} {tail}".strip()
     # Существительное встречи — в именительный падеж: «встречу с Иваном» → «Встреча с Иваном»
     first = body.split(" ", 1)
     if first and first[0].lower() in MEETING_VERBS and len(first) > 1 and re.match(r"(?:с|со)\s", first[1], I):

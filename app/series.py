@@ -27,8 +27,8 @@ def owner_filter(owner: Owner):
     return Series.account_id == owner.account.id if owner.account else Series.sandbox_id == owner.sandbox_id
 
 
-def rule_text(days: list[int], time: str | None = None) -> str:
-    """«каждый вторник в 10:00», «по понедельникам и четвергам», «по будням в 9:00»."""
+def rule_text(days: list[int], time: str | None = None, end: str | None = None) -> str:
+    """«каждый вторник в 10:00», «по понедельникам и четвергам», «по будням с 9:00 до 18:00»."""
     days = sorted(set(days))
     if days == list(range(7)):
         rule = "каждый день"
@@ -41,6 +41,8 @@ def rule_text(days: list[int], time: str | None = None) -> str:
     else:
         names = [DAY_MANY[d] for d in days]
         rule = "по " + ", ".join(names[:-1]) + " и " + names[-1]
+    if time and end:
+        return f"{rule} с {time} до {end}"
     return f"{rule} в {time}" if time else rule
 
 
@@ -61,8 +63,8 @@ def weekdays_of(series: Series) -> list[int]:
 
 def occurrence(owner: Owner, series: Series, day: date, created: datetime) -> Record:
     return owner.new_record(
-        type=series.type, text=series.text, date=day.isoformat(), time=series.time, date_kind=DateKind.exact,
-        status=None if series.type == TaskType.meeting else TaskStatus.open, created_at=created,
+        type=series.type, text=series.text, date=day.isoformat(), time=series.time, end_time=series.end_time,
+        date_kind=DateKind.exact, status=None if series.type in (TaskType.meeting, TaskType.busy) else TaskStatus.open, created_at=created,
         series_id=series.id, repeat=series.repeat(),
     )
 
@@ -80,7 +82,7 @@ async def create(db: AsyncSession, owner: Owner, draft: dict, today: date) -> tu
     created = datetime.now(timezone.utc)
     series = Series(
         account_id=owner.account.id if owner.account else None, sandbox_id=None if owner.account else owner.sandbox_id,
-        type=TaskType(draft["type"]), text=draft["text"][:300], time=draft.get("time"),
+        type=TaskType(draft["type"]), text=draft["text"][:300], time=draft.get("time"), end_time=draft.get("end_time"),
         weekdays=",".join(map(str, weekdays)), until=until.isoformat() if until else None,
         filled_until=last.isoformat(), created_at=created,
     )

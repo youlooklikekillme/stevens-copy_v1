@@ -1,5 +1,5 @@
 /** Карточка записи — 02-screens.md, раздел 3. */
-import { Bell, CircleAlert, CircleCheck, Repeat, StickyNote, Users } from 'lucide-react';
+import { Bell, CircleAlert, CircleCheck, Hourglass, Repeat, StickyNote, Users } from 'lucide-react';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { RecordItem } from '../api/types';
 import { T } from '../content/texts';
@@ -8,8 +8,10 @@ import { isPast } from '../lib/dates';
 import { recordCardDeleted } from '../extensions/flags';
 import { RecordCardState } from '../extensions/points';
 
-const TYPE_ICON = { meeting: Users, task: CircleCheck, reminder: Bell, note: StickyNote } as const;
-const TYPE_WORD = { meeting: T.type_meeting, task: T.type_task, reminder: T.type_reminder, note: T.type_note } as const;
+const TYPE_ICON = { meeting: Users, task: CircleCheck, reminder: Bell, note: StickyNote, busy: Hourglass } as const;
+const TYPE_WORD = {
+  meeting: T.type_meeting, task: T.type_task, reminder: T.type_reminder, note: T.type_note, busy: T.type_busy,
+} as const;
 const NEW_MS = 2000;
 
 type Props = {
@@ -56,6 +58,7 @@ export function RecordCard({ record, withDate, isNew = false, compact = false, c
   const classes = [
     'card',
     compact && 'card--compact',
+    record.type === 'busy' && 'card--busy',
     draft && 'card--draft',
     isConflict && !draft && 'card--conflict',
     (done || past || deleted) && 'card--muted',

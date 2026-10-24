@@ -29,6 +29,8 @@
   --c-mark:        #F1E4C4;  /* «маркер» под выделенным полем, ::selection */
   --c-new-bg:      #F6EEDB;  /* пик подсветки новой записи */
   --c-draft-line:  #BDB29A;  /* пунктир черновика */
+  --c-busy-bg:     #EFECE5;  /* занятость: серая карточка */
+  --c-busy-line:   #B5AE9F;  /* занятость: полоса слева и в календаре */
 
   /* персонаж Stevens (доп Д14) — только для SVG персонажа */
   --c-mascot-shade:        #F1ECE1;  /* тень на теле */
@@ -118,6 +120,8 @@
     --c-mark:        #4A3D22;
     --c-new-bg:      #2A2519;
     --c-draft-line:  #5E574B;
+    --c-busy-bg:     #22201D;
+    --c-busy-line:   #5C564C;
 
     --c-mascot-shade:        #25221E;
     --c-mascot-lens:         #2A2723;

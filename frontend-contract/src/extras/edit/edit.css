@@ -12,6 +12,10 @@
 .edit-form__field { display: flex; flex-direction: column; min-width: 0; }
 .edit-form__field--date { flex: 0 0 calc(60% - 5px); }
 .edit-form__field--time { flex: 0 0 calc(40% - 5px); }
+/* Занятость: дата на всю ширину, ниже «С» и «До» пополам */
+.edit-form__row--interval { flex-wrap: wrap; row-gap: var(--sp-4); }
+.edit-form__row--interval .edit-form__field--date { flex: 1 1 100%; }
+.edit-form__row--interval .edit-form__field--time { flex: 1 1 calc(50% - 5px); }
 .edit-form__label { font-size: var(--fs-meta); line-height: var(--lh-tight); color: var(--c-text-2); margin-bottom: var(--sp-2); }
 .edit-form__input,
 .edit-form__textarea {

@@ -155,3 +155,48 @@ test('короткое имя «Стивс» в разных написания�
   }
   vi.useRealTimers();
 });
+
+test('его фраза без имени из динамиков не попадает в следующую просьбу', async () => {
+  vi.useFakeTimers();
+  const events: string[] = [];
+  const offWake = voice.on('wake', () => events.push('wake'));
+  const offFinal = voice.on('final', (t) => events.push(`final:${t}`));
+  voice.setArmed(true);
+  vi.advanceTimersByTime(500);
+  const first = FakeRec.last!;
+  voice.setEcho('Добавил встречу на завтра в 16:00');
+  first.say('добавил встречу на завтра в 16:00');
+  voice.setEcho(null);
+  await vi.advanceTimersByTimeAsync(700);
+  const second = FakeRec.last!;
+  expect(second).not.toBe(first);
+  second.say('Стивенс, отредактируй последнюю запись');
+  vi.advanceTimersByTime(2000);
+  expect(events).toEqual(['wake', 'final:отредактируй последнюю запись']);
+  offWake();
+  offFinal();
+  voice.setArmed(false);
+  await vi.advanceTimersByTimeAsync(700);
+  vi.useRealTimers();
+});
+
+test('браузер переписал распознанное и потерял имя — старые куски во фразу не попадают, куски не слипаются', () => {
+  vi.useFakeTimers();
+  const events: string[] = [];
+  const offFinal = voice.on('final', (t) => events.push(`final:${t}`));
+  voice.setArmed(true);
+  vi.advanceTimersByTime(500);
+  const rec = FakeRec.last!;
+  const send = (...pieces: string[]) => rec.onresult?.({
+    resultIndex: 0, results: pieces.map((p, i) => ({ isFinal: i < pieces.length - 1, 0: { transcript: p } })),
+  });
+  send('встреча завтра в 16:00', 'Стивенс встреча с Ариной');
+  send('встреча завтра в 16:00', 'стебель встреча с Ариной', '16.0');
+  send('встреча завтра в 16:00', 'стебель встреча с Ариной', '16.0', '16:00');
+  vi.advanceTimersByTime(2000);
+  expect(events).toEqual(['final:стебель встреча с Ариной 16.0 16:00']);
+  offFinal();
+  voice.setArmed(false);
+  vi.advanceTimersByTime(700);
+  vi.useRealTimers();
+});

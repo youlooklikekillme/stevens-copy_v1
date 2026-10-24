@@ -5,7 +5,7 @@ import { features } from '../config/features';
 import { T } from '../content/texts';
 import { HeaderRightStart, sandboxMenuExtra } from '../extensions/points';
 import { install, installHintKey, isInstalled, useCanInstall, useMedia, useTitlebarMode } from '../lib/install';
-import { newDialog, resetSandbox, send, setHint } from '../state/chat';
+import { newDialog, resetSandbox, setHint } from '../state/chat';
 import { emitActivity } from '../state/events';
 import { goAuth, logout } from '../state/session';
 import { useApp } from '../state/store';
@@ -28,9 +28,7 @@ export function Header() {
     ? []
     : [{ label: T.menu_install, onSelect: () => (canInstall ? void install() : setHint(installHintKey())) }];
 
-  const notesItem = { label: T.menu_notes, onSelect: () => void send(T.notes_command, 'button') };
   const sandboxItems = [
-    notesItem,
     ...sandboxMenuExtra(T.menu_tour),
     { label: T.menu_reset_sandbox, onSelect: () => setDialog('reset') },
     ...installItem,
@@ -54,7 +52,7 @@ export function Header() {
       {mode === 'account' && features.auth && (
         <Menu
           heading={login ?? ''}
-          items={[notesItem, ...installItem, { label: T.menu_logout, onSelect: logout }]}
+          items={[...installItem, { label: T.menu_logout, onSelect: logout }]}
           trigger={({ open, toggle }) => (
             <button type="button" className="avatar" aria-label={T.profile_label} aria-haspopup="menu" aria-expanded={open} onClick={toggle}>
               {(login ?? '?').charAt(0).toUpperCase()}

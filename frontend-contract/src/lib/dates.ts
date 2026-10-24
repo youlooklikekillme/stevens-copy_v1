@@ -79,7 +79,10 @@ export function metaParts(record: RecordItem, withDate: boolean, today: Date = n
   } else if (withDate) {
     parts.push({ field: 'date', text: metaDate(record.date, today) });
   }
-  if (record.time && record.date_kind !== 'none') parts.push({ field: 'time', text: record.time });
+  if (record.time && record.date_kind !== 'none') {
+    // Занятость и встреча «с … до …» — интервалом: «09:00–18:00»
+    parts.push({ field: 'time', text: record.end_time ? `${record.time}–${record.end_time}` : record.time });
+  }
   return parts;
 }
 
@@ -124,7 +127,9 @@ export function isPast(record: RecordItem, at: Date = now()): boolean {
   if (record.marks.includes('draft') || !record.date || record.date_kind === 'none') return false;
   const today = isoDate(at);
   if (record.date_kind === 'exact' && record.time) {
-    const [h, m] = record.time.split(':').map(Number);
+    // Интервал «с 9 до 18» прошёл, когда кончился (через полночь — к концу дня)
+    const ends = record.end_time && record.end_time > record.time ? record.end_time : record.end_time ? '23:59' : record.time;
+    const [h, m] = ends.split(':').map(Number);
     const moment = parseIso(record.date);
     moment.setHours(h, m, 0, 0);
     return moment.getTime() < at.getTime();

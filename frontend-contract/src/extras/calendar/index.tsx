@@ -15,7 +15,7 @@ import { store, useApp } from '../../state/store';
 import { EditForm } from '../edit/EditForm';
 import { DragGhost, MoveNotice, startDrag, takeSuppressedClick, useDrag } from './move';
 import { calendar, load, shiftMonth } from './state';
-import { conflictIds, countByDate, dayLabel, dotsFor, gridDays, sortDay } from './month';
+import { busyDates, conflictIds, countByDate, dayLabel, dotsFor, gridDays, sortDay } from './month';
 import './calendar.css';
 
 const RELOAD_KINDS = new Set(['created', 'completed', 'deleted', 'cancelled', 'updated']);
@@ -76,6 +76,7 @@ function MonthGrid() {
   const { year, month, selected, records, loading } = state;
   const todayIso = isoDate(now());
   const counts = loading ? new Map<string, number>() : countByDate(records);
+  const busyDays = loading ? new Set<string>() : busyDates(records);
   const isCurrent = year === now().getFullYear() && month === now().getMonth();
   const drag = useDrag();
   const dropDay = drag?.target.kind === 'day' && drag.target.date !== drag.record.date ? drag.target.date : null;
@@ -133,6 +134,7 @@ function MonthGrid() {
             >
               <span className="cal__num">{day.getDate()}</span>
               <span className="cal__dots" aria-hidden="true">
+                {busyDays.has(iso) && <span className="cal__busy" />}
                 {Array.from({ length: dotsFor(count) }, (_, i) => <span key={i} className="cal__dot" />)}
               </span>
             </button>
